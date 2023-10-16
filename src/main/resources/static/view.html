@@ -18,43 +18,39 @@
         align-items: center;
     }
 
-    #dataease-container {
+    #dataease-view-container {
         display: inline-flex;
         width: 300px;
         height: 300px;
         overflow: auto;
     }
 
-    .demo-bottom {
-        display: inline-block;
-    }
+
 </style>
 <body>
 <div class="demo-top">
-    flushbonading
+    this is view page
 </div>
-<div id="dataease-container">
+<div id="dataease-view-container">
 </div>
-<div class="demo-bottom">
-    flushbonading
-</div>
+
 </body>
 <script type="module">
     window.onload = () => {
         var xhr = new XMLHttpRequest();
         var url = "/token/admin"
-        var resourceId = "1706502284612005888"
-        var opt = "create"
+        var dvId = "1706502284612005888"
+        var chartId = "7112276360822788096"
         xhr.onreadystatechange = function () {
             if (xhr.readyState == 4 && xhr.status == 200) {
                 const token = xhr.response
-                DataEaseBi.create('DashboardEditor', {
+                DataEaseBi.create('ViewWrapper', {
                     baseUrl: 'https://de2.fit2cloud.com/',
                     token: token,
-                    resourceId: resourceId,
-                    opt: opt
+                    dvId: dvId,
+                    chartId: chartId
                 })
-                DataEaseBi.initialize({container: '#dataease-container'})
+                DataEaseBi.initialize({container: '#dataease-view-container'})
             }
         }
         xhr.open('get', url, true);
