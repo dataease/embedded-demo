@@ -1,68 +1,60 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>flushbonading</title>
+    <meta charset="utf-8">
+    <title>Layui</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="//unpkg.com/layui@2.6.8/dist/css/layui.css">
 
-    <script crossorigin  type="module"  src="https://de2.fit2cloud.com/js/div_import_0.0.0-dataease.js" ></script>
+    <script src="//unpkg.com/layui@2.6.8/dist/layui.js" charset="utf-8"></script>
 
 </head>
 <style>
-    .demo-top {
-        display: inline-flex;
-        height: 100vh;
-        justify-content: center;
-        align-items: center;
+    .main-div {
+        width: 100%;
+        position: absolute;
+        top: 60px;
+        height: calc(100% - 60px);
     }
-
-    #dataease-container {
-        display: inline-flex;
-        width: 300px;
-        height: 300px;
-        overflow: auto;
-    }
-
-    .demo-bottom {
-        display: inline-block;
+    .main-iframe {
+        width: 100%;
+        height: 100%;
     }
 </style>
 <body>
-<div class="demo-top">
-    flushbonading
+
+<ul class="layui-nav">
+    <li class="layui-nav-item layui-this"><a href="javascript:switchMain(0);">资源预览</a></li>
+    <li class="layui-nav-item"><a href="javascript:switchMain(1);">仪表板编辑</a></li>
+    <li class="layui-nav-item"><a href="javascript:switchMain(2);">大屏编辑</a></li>
+    <li class="layui-nav-item"><a href="javascript:switchMain(3);">视图预览</a></li>
+</ul>
+
+<div class="main-div">
+    <iframe id="main-iframe" class="main-iframe"></iframe>
 </div>
-<div id="dataease-container">
-</div>
-<div class="demo-bottom">
-    flushbonading
-</div>
-</body>
-<script type="module">
-    window.onload = () => {
-        var xhr = new XMLHttpRequest();
-        var url = "/token/admin"
-        var resourceId = "1706502284612005888"
-        var opt = "create"
-        xhr.onreadystatechange = function () {
-            if (xhr.readyState == 4 && xhr.status == 200) {
-                const token = xhr.response
-                DataEaseBi.create('DashboardEditor', {
-                    baseUrl: 'https://de2.fit2cloud.com/',
-                    token: token,
-                    resourceId: resourceId,
-                    opt: opt
-                })
-                DataEaseBi.initialize({container: '#dataease-container'})
-            }
-        }
-        xhr.open('get', url, true);
-        xhr.send();
+<script>
+    layui.use('element', function(){
+        var element = layui.element;
+
+        //监听导航点击
+        element.on('nav(demo)', function(elem){
+            layer.msg(elem.text());
+        });
+    })
+    var currentIndex = 0
+    var linkArray = ['ResourceView', 'DashboardEditor', 'VisualizationEditor', 'view']
+    var switchMain = index => {
+        if (currentIndex === index) return
+        var url = linkArray[index] + '.html?=' + (new Date()).getTime()
+        document.getElementById("main-iframe").src = url
+        currentIndex = index
     }
 
-
-
+    switchMain(0)
 </script>
 
+</body>
 </html>

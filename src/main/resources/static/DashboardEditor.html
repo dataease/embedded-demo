@@ -11,10 +11,12 @@
 
 </head>
 <style>
-    #dataease-view-container {
+
+
+    #dataease-container {
         display: inline-flex;
-        width: 500px;
-        height: 500px;
+        width: 100%;
+        height: 100%;
         overflow: auto;
     }
 
@@ -22,7 +24,7 @@
 </style>
 <body>
 
-<div id="dataease-view-container">
+<div id="dataease-container">
 </div>
 
 </body>
@@ -30,18 +32,18 @@
     window.onload = () => {
         var xhr = new XMLHttpRequest();
         var url = "/token/admin"
-        var dvId = "1706502284612005888"
-        var chartId = "7112276360822788096"
+        var resourceId = "1706502284612005888" //资源ID
+        var opt = "create" //固定写法
         xhr.onreadystatechange = function () {
             if (xhr.readyState == 4 && xhr.status == 200) {
                 const token = xhr.response
-                DataEaseBi.create('ViewWrapper', {
+                DataEaseBi.create('DashboardEditor', {
                     baseUrl: 'https://de2.fit2cloud.com/',
                     token: token,
-                    dvId: dvId,
-                    chartId: chartId
+                    resourceId: resourceId,
+                    opt: opt
                 })
-                DataEaseBi.initialize({container: '#dataease-view-container'})
+                DataEaseBi.initialize({container: '#dataease-container'})
             }
         }
         xhr.open('get', url, true);
