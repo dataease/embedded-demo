@@ -32,6 +32,7 @@
         var url = "/token/admin"
         var dvId = "1706502284612005888"
         var chartId = "7112276360822788096"
+        var busiFlag = "dashboard"
         xhr.onreadystatechange = function () {
             if (xhr.readyState == 4 && xhr.status == 200) {
                 const token = xhr.response
@@ -39,7 +40,8 @@
                     baseUrl: 'https://de2.fit2cloud.com/',
                     token: token,
                     dvId: dvId,
-                    chartId: chartId
+                    chartId: chartId,
+                    busiFlag: busiFlag
                 })
                 DataEaseBi.initialize({container: '#dataease-view-container'})
             }
