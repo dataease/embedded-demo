@@ -44,7 +44,7 @@
             layer.msg(elem.text());
         });
     })
-    var currentIndex = 0
+    var currentIndex = -1
     var linkArray = ['ResourceView', 'DashboardEditor', 'VisualizationEditor', 'view']
     var switchMain = index => {
         if (currentIndex === index) return
@@ -52,8 +52,10 @@
         document.getElementById("main-iframe").src = url
         currentIndex = index
     }
+    window.onload = () => {
+        switchMain(0)
+    }
 
-    switchMain(0)
 </script>
 
 </body>

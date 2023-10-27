@@ -14,14 +14,19 @@
   window.onload = () => {
     var xhr = new XMLHttpRequest();
     var url = "/token/admin"
-    var dvId = "1706502284612005888"
+    /*var dvId = "1706502284612005888"
+    var busiFlag = "dashboard"*/
+
+    var dvId = "1691027066527477760"
+    var busiFlag = "dataV"
     xhr.onreadystatechange = function () {
       if (xhr.readyState == 4 && xhr.status == 200) {
         const token = xhr.response
         DataEaseBi.create('Dashboard', {
           baseUrl: 'https://de2.fit2cloud.com/',
           token: token,
-          dvId: dvId
+          dvId: dvId,
+          busiFlag: busiFlag
         })
         DataEaseBi.initialize({ container: '#app' })
       }
