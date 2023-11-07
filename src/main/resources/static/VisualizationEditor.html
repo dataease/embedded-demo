@@ -37,7 +37,7 @@
     xhr.onreadystatechange = function () {
       if (xhr.readyState == 4 && xhr.status == 200) {
         const token = xhr.response
-        DataEaseBi.create('DashboardEditor', {
+        DataEaseBi.create('VisualizationEditor', {
           baseUrl: 'https://de2.fit2cloud.com/',
           token: token,
           dvId: dvId,
