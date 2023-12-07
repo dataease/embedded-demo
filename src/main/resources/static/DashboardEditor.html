@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <head>
     <meta charset="UTF-8">
@@ -7,20 +7,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>flushbonading</title>
 
-    <script crossorigin  type="module"  src="https://de2.fit2cloud.com/js/div_import_0.0.0-dataease.js" ></script>
+    <script crossorigin  type="module" th:src="@{{domain}js/div_import_0.0.0-dataease.js(domain=${vo.domain})}"></script>
 
 </head>
 <style>
-
-
     #dataease-container {
         display: inline-flex;
         width: 100%;
         height: 100%;
         overflow: auto;
     }
-
-
 </style>
 <body>
 
@@ -28,17 +24,19 @@
 </div>
 
 </body>
-<script type="module">
+<script th:inline="javascript" type="module">
     window.onload = () => {
         var xhr = new XMLHttpRequest();
-        var url = "/token/admin"
-        var resourceId = "1706502284612005888" //资源ID
+        var account = [[${vo.account}]]
+        var url = `/token/${account}`
+        var resourceId = [[${vo.dashboardId}]]
         var opt = "create" //固定写法
+        var domain = [[${vo.domain}]]
         xhr.onreadystatechange = function () {
             if (xhr.readyState == 4 && xhr.status == 200) {
                 const token = xhr.response
                 DataEaseBi.create('DashboardEditor', {
-                    baseUrl: 'https://de2.fit2cloud.com/',
+                    baseUrl: domain,
                     token: token,
                     resourceId: resourceId,
                     opt: opt

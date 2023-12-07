@@ -1,29 +1,28 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>adc</title>
-  <script crossorigin  type="module"  src="https://de2.fit2cloud.com/js/div_import_0.0.0-dataease.js" ></script>
+  <script crossorigin  type="module" th:src="@{{domain}js/div_import_0.0.0-dataease.js(domain=${vo.domain})}"></script>
 </head>
 <body>
 <div id="app"></div>
 
 </body>
-<script type="module">
+<script th:inline="javascript" type="module">
   window.onload = () => {
     var xhr = new XMLHttpRequest();
-    var url = "/token/admin"
-    /*var dvId = "1706502284612005888"
-    var busiFlag = "dashboard"*/
-
-    var dvId = "1691027066527477760"
+    var account = [[${vo.account}]]
+    var url = `/token/${account}`
+    var dvId = [[${vo.screenId}]]
     var busiFlag = "dataV"
+    var domain = [[${vo.domain}]]
     xhr.onreadystatechange = function () {
       if (xhr.readyState == 4 && xhr.status == 200) {
         const token = xhr.response
         DataEaseBi.create('Dashboard', {
-          baseUrl: 'https://de2.fit2cloud.com/',
+          baseUrl: domain,
           token: token,
           dvId: dvId,
           busiFlag: busiFlag

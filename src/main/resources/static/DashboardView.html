@@ -1,27 +1,13 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-
 <head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>flushbonading</title>
-
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>adc</title>
   <script crossorigin  type="module" th:src="@{{domain}js/div_import_0.0.0-dataease.js(domain=${vo.domain})}"></script>
-
 </head>
-<style>
-  #dataease-container {
-    display: inline-flex;
-    width: 100%;
-    height: 100%;
-    overflow: auto;
-  }
-</style>
 <body>
-
-<div id="dataease-container">
-</div>
+<div id="app"></div>
 
 </body>
 <script th:inline="javascript" type="module">
@@ -29,19 +15,19 @@
     var xhr = new XMLHttpRequest();
     var account = [[${vo.account}]]
     var url = `/token/${account}`
-    var dvId = [[${vo.screenId}]]
-    var opt = "create" //固定写法
+    var dvId = [[${vo.dashboardId}]]
+    var busiFlag = "dashboard"
     var domain = [[${vo.domain}]]
     xhr.onreadystatechange = function () {
       if (xhr.readyState == 4 && xhr.status == 200) {
         const token = xhr.response
-        DataEaseBi.create('VisualizationEditor', {
+        DataEaseBi.create('Dashboard', {
           baseUrl: domain,
           token: token,
           dvId: dvId,
-          opt: opt
+          busiFlag: busiFlag
         })
-        DataEaseBi.initialize({container: '#dataease-container'})
+        DataEaseBi.initialize({ container: '#app' })
       }
     }
     xhr.open('get', url, true);
@@ -51,5 +37,4 @@
 
 
 </script>
-
 </html>

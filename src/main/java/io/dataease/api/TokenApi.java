@@ -14,11 +14,11 @@ public class TokenApi {
     /**
      * appId从dataease系统管理中获取
      */
-    private static final String appId = "123456789";
+    private static final String appId = "9btu4crceg46oryn";
     /**
      * secret从dataease系统管理中获取
      */
-    private static final String secret = "987654321";
+    private static final String secret = "3nbeawvgushcmogi";
 
     /**
      * 获取token需要先从dataease获取appId

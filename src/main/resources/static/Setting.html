@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Demo</title>
+  <link href="//unpkg.com/layui@2.9.0/dist/css/layui.css" rel="stylesheet">
+</head>
+<style>
+  .setting {
+    padding: 40px 200px;
+  }
+  .layui-form-label {
+    width: 200px !important;
+  }
+  .layui-input-block {
+    margin-left: 200px !important;
+  }
+  .setting-inline-input {
+    width: 310px !important;
+    margin-right: 0px !important;
+  }
+  .layui-inline {
+    margin-right: 0px !important;
+  }
+  .button-container {
+    float: right;
+  }
+</style>
+<body>
+<!-- 给容器追加 class="layui-form-pane"，即可显示为方框风格 -->
+<form class="layui-form layui-form-pane setting" action="">
+  <div class="layui-form-item">
+    <label class="layui-form-label">DataEase服务</label>
+    <div class="layui-input-block">
+      <input type="text" name="domain" th:value="${vo.domain}" autocomplete="off" placeholder="请输入" lay-verify="required" class="layui-input">
+    </div>
+  </div>
+  <div class="layui-form-item">
+    <label class="layui-form-label">DataEase账号</label>
+    <div class="layui-input-block">
+      <input type="text" name="account" th:value="${vo.account}" autocomplete="off" placeholder="请输入" lay-verify="required" class="layui-input">
+    </div>
+  </div>
+
+  <div class="layui-form-item">
+    <label class="layui-form-label">默认仪表板ID</label>
+    <div class="layui-input-block">
+      <input type="text" name="dashboardId" th:value="${vo.dashboardId}" autocomplete="off" placeholder="请输入" class="layui-input">
+    </div>
+  </div>
+
+  <div class="layui-form-item">
+    <label class="layui-form-label">默认大屏ID</label>
+    <div class="layui-input-block">
+      <input type="text" name="screenId" th:value="${vo.screenId}" autocomplete="off" placeholder="请输入" class="layui-input">
+    </div>
+  </div>
+
+
+  <div class="layui-form-item">
+    <div class="layui-inline">
+      <label class="layui-form-label">默认视图所属资源ID</label>
+      <div class="layui-input-block setting-inline-input">
+        <input type="text" name="viewResourceId" th:value="${vo.viewResourceId}" autocomplete="off" class="layui-input">
+      </div>
+    </div>
+
+    <div class="layui-inline">
+      <label class="layui-form-label">默认视图ID</label>
+      <div class="layui-input-inline setting-inline-input">
+        <input type="text" name="viewId" th:value="${vo.viewId}" autocomplete="off" class="layui-input">
+      </div>
+    </div>
+  </div>
+
+  <div class="layui-form-item" pane>
+    <label class="layui-form-label">默认视图所属资源类型</label>
+    <div class="layui-input-block">
+      <input type="radio" name="viewBusiFlag" value="dashboard" title="仪表板" th:attr ="checked=${(vo == null || #strings.isEmpty(vo.viewBusiFlag) || #strings.equals(vo.viewBusiFlag, 'dashboard')) ? true : false}">
+      <input type="radio" name="viewBusiFlag" value="dataV" title="大屏" th:attr ="checked=${(vo != null && #strings.equals(vo.viewBusiFlag, 'dataV')) ? true : false}">
+    </div>
+  </div>
+
+  <div class="layui-form-item button-container">
+    <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+    <button class="layui-btn" lay-submit lay-filter="demo2">确认</button>
+  </div>
+</form>
+
+<!-- 请勿在项目正式环境中引用该 layui.js 地址 -->
+<script src="//unpkg.com/layui@2.9.0/dist/layui.js"></script>
+<script>
+  var layer = null;
+  layui.use(['form'], function(){
+    var form = layui.form;
+    layer = layui.layer;
+    // 提交事件
+    form.on('submit(demo2)', function(data){
+      var field = data.field;
+      save(field)
+      return false;
+    });
+  });
+
+  const save = param => {
+    var xhr = new XMLHttpRequest();
+    var url = "/save"
+    xhr.onreadystatechange = function () {
+      if (xhr.readyState == 4 && xhr.status == 200) {
+        layer.msg('保存成功');
+        setTimeout(() => {
+          window.location.reload(true)
+        }, 1500)
+      }
+    }
+    xhr.open('post', url, true);
+    xhr.setRequestHeader('Content-Type', 'application/json')
+    xhr.send(JSON.stringify(param));
+  }
+
+
+</script>
+
+</body>
+</html>

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="utf-8">
     <title>Layui</title>
@@ -20,16 +20,22 @@
     }
     .main-iframe {
         width: 100%;
-        height: 100%;
+        border: 0;
+        height: calc(100% - 5px);
     }
 </style>
 <body>
 
 <ul class="layui-nav">
-    <li class="layui-nav-item layui-this"><a href="javascript:switchMain(0);">资源预览</a></li>
-    <li class="layui-nav-item"><a href="javascript:switchMain(1);">仪表板编辑</a></li>
-    <li class="layui-nav-item"><a href="javascript:switchMain(2);">大屏编辑</a></li>
-    <li class="layui-nav-item"><a href="javascript:switchMain(3);">视图预览</a></li>
+    <li class="layui-nav-item layui-this"><a href="javascript:switchMain(0);">系统设置</a></li>
+
+    <li th:if="${vo.domain != null && !#strings.isEmpty(vo.dashboardId)}" class="layui-nav-item"><a href="javascript:switchMain(1);">仪表板预览</a></li>
+    <li th:if="${vo.domain != null && !#strings.isEmpty(vo.screenId)}" class="layui-nav-item"><a href="javascript:switchMain(2);">大屏预览</a></li>
+    <li th:if="${vo.domain != null && !#strings.isEmpty(vo.dashboardId)}" class="layui-nav-item"><a href="javascript:switchMain(3);">仪表板编辑</a></li>
+    <li th:if="${vo.domain != null && !#strings.isEmpty(vo.screenId)}" class="layui-nav-item"><a href="javascript:switchMain(4);">大屏编辑</a></li>
+    <li th:if="${vo.domain != null && !#strings.isEmpty(vo.viewResourceId) && !#strings.isEmpty(vo.viewId)}" class="layui-nav-item"><a href="javascript:switchMain(5);">视图预览</a></li>
+
+    <!--<li th:if="${vo.domain != null}" class="layui-nav-item"><a href="javascript:switchMain(6);">动态资源</a></li>-->
 </ul>
 
 <div class="main-div">
@@ -45,10 +51,10 @@
         });
     })
     var currentIndex = -1
-    var linkArray = ['ResourceView', 'DashboardEditor', 'VisualizationEditor', 'view']
+    var linkArray = ['Setting', 'DashboardView', 'VisualizationView', 'DashboardEditor', 'VisualizationEditor', 'view']
     var switchMain = index => {
         if (currentIndex === index) return
-        var url = linkArray[index] + '.html?=' + (new Date()).getTime()
+        var url = linkArray[index] + '?=' + (new Date()).getTime()
         document.getElementById("main-iframe").src = url
         currentIndex = index
     }
