@@ -29,13 +29,13 @@
 <ul class="layui-nav">
     <li class="layui-nav-item layui-this"><a href="javascript:switchMain(0);">系统设置</a></li>
 
-    <li th:if="${vo.domain != null && !#strings.isEmpty(vo.dashboardId)}" class="layui-nav-item"><a href="javascript:switchMain(1);">仪表板预览</a></li>
-    <li th:if="${vo.domain != null && !#strings.isEmpty(vo.screenId)}" class="layui-nav-item"><a href="javascript:switchMain(2);">大屏预览</a></li>
-    <li th:if="${vo.domain != null && !#strings.isEmpty(vo.dashboardId)}" class="layui-nav-item"><a href="javascript:switchMain(3);">仪表板编辑</a></li>
-    <li th:if="${vo.domain != null && !#strings.isEmpty(vo.screenId)}" class="layui-nav-item"><a href="javascript:switchMain(4);">大屏编辑</a></li>
-    <li th:if="${vo.domain != null && !#strings.isEmpty(vo.viewResourceId) && !#strings.isEmpty(vo.viewId)}" class="layui-nav-item"><a href="javascript:switchMain(5);">视图预览</a></li>
+    <li th:if="${vo.domain != null && !#strings.isEmpty(vo.dashboardId) && !#strings.isEmpty(vo.appId)}" class="layui-nav-item"><a href="javascript:switchMain(1);">仪表板预览</a></li>
+    <li th:if="${vo.domain != null && !#strings.isEmpty(vo.screenId) && !#strings.isEmpty(vo.appId)}" class="layui-nav-item"><a href="javascript:switchMain(2);">大屏预览</a></li>
+    <li th:if="${vo.domain != null && !#strings.isEmpty(vo.dashboardId) && !#strings.isEmpty(vo.appId)}" class="layui-nav-item"><a href="javascript:switchMain(3);">仪表板编辑</a></li>
+    <li th:if="${vo.domain != null && !#strings.isEmpty(vo.screenId) && !#strings.isEmpty(vo.appId)}" class="layui-nav-item"><a href="javascript:switchMain(4);">大屏编辑</a></li>
+    <li th:if="${vo.domain != null && !#strings.isEmpty(vo.viewResourceId) && !#strings.isEmpty(vo.viewId) && !#strings.isEmpty(vo.appId)}" class="layui-nav-item"><a href="javascript:switchMain(5);">视图预览</a></li>
 
-    <!--<li th:if="${vo.domain != null}" class="layui-nav-item"><a href="javascript:switchMain(6);">动态资源</a></li>-->
+    <!--<li th:if="${vo.domain != null && !#strings.isEmpty(vo.appId)}" class="layui-nav-item"><a href="javascript:switchMain(6);">模拟场景</a></li>-->
 </ul>
 
 <div class="main-div">

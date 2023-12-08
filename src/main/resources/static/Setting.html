@@ -17,11 +17,12 @@
     margin-left: 200px !important;
   }
   .setting-inline-input {
-    width: 310px !important;
+    width: calc(100% - 200px) !important;
     margin-right: 0px !important;
   }
   .layui-inline {
     margin-right: 0px !important;
+    width: calc(50% - 2px) !important;
   }
   .button-container {
     float: right;
@@ -40,6 +41,22 @@
     <label class="layui-form-label">DataEase账号</label>
     <div class="layui-input-block">
       <input type="text" name="account" th:value="${vo.account}" autocomplete="off" placeholder="请输入" lay-verify="required" class="layui-input">
+    </div>
+  </div>
+
+  <div class="layui-form-item">
+    <div class="layui-inline">
+      <label class="layui-form-label">APP ID</label>
+      <div class="layui-input-block setting-inline-input">
+        <input type="text" name="appId" th:value="${vo.appId}" autocomplete="off" placeholder="来自于DataEase-嵌入式管理" lay-verify="required" class="layui-input">
+      </div>
+    </div>
+
+    <div class="layui-inline">
+      <label class="layui-form-label">APP Secret</label>
+      <div class="layui-input-inline setting-inline-input">
+        <input type="password" name="appSecret" th:value="${vo.appSecret}" autocomplete="off" placeholder="来自于DataEase-嵌入式管理" lay-verify="required" class="layui-input">
+      </div>
     </div>
   </div>
 
@@ -86,6 +103,7 @@
     <button type="reset" class="layui-btn layui-btn-primary">重置</button>
     <button class="layui-btn" lay-submit lay-filter="demo2">确认</button>
   </div>
+
 </form>
 
 <!-- 请勿在项目正式环境中引用该 layui.js 地址 -->
@@ -110,7 +128,7 @@
       if (xhr.readyState == 4 && xhr.status == 200) {
         layer.msg('保存成功');
         setTimeout(() => {
-          window.location.reload(true)
+          window.parent.location.reload(true)
         }, 1500)
       }
     }

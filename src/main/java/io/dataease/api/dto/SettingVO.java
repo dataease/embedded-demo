@@ -11,6 +11,10 @@ public class SettingVO implements Serializable {
 
     private String account;
 
+    private String appId;
+
+    private String appSecret;
+
     private String dashboardId;
 
     private String screenId;
@@ -77,9 +81,27 @@ public class SettingVO implements Serializable {
         this.viewBusiFlag = viewBusiFlag;
     }
 
-    public SettingVO(String domain, String account, String dashboardId, String screenId, String viewResourceId, String viewId, String viewBusiFlag) {
+    public String getAppId() {
+        return appId;
+    }
+
+    public void setAppId(String appId) {
+        this.appId = appId;
+    }
+
+    public String getAppSecret() {
+        return appSecret;
+    }
+
+    public void setAppSecret(String appSecret) {
+        this.appSecret = appSecret;
+    }
+
+    public SettingVO(String domain, String account, String appId, String appSecret, String dashboardId, String screenId, String viewResourceId, String viewId, String viewBusiFlag) {
         this.domain = domain;
         this.account = account;
+        this.appId = appId;
+        this.appSecret = appSecret;
         this.dashboardId = dashboardId;
         this.screenId = screenId;
         this.viewResourceId = viewResourceId;
