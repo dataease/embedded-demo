@@ -59,6 +59,13 @@ public class PageController {
         return "view";
     }
 
+    @GetMapping("/ViewIframe")
+    public String viewIframe(Model model) {
+        SettingVO vo = SettingUtils.read();
+        model.addAttribute("vo", vo);
+        return "ViewIframe";
+    }
+
     @GetMapping("/Resource")
     public String resource(Model model) {
         SettingVO vo = SettingUtils.read();
