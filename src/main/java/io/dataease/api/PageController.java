@@ -66,6 +66,31 @@ public class PageController {
         return "ViewIframe";
     }
 
+    @GetMapping("/DatasourceTree")
+    public String datasourceTree(Model model) {
+        SettingVO vo = SettingUtils.read();
+        model.addAttribute("vo", vo);
+        return "tree/datasource";
+    }
+    @GetMapping("/DatasetTree")
+    public String datasetTree(Model model) {
+        SettingVO vo = SettingUtils.read();
+        model.addAttribute("vo", vo);
+        return "tree/dataset";
+    }
+    @GetMapping("/PanelTree")
+    public String panelTree(Model model) {
+        SettingVO vo = SettingUtils.read();
+        model.addAttribute("vo", vo);
+        return "tree/panel";
+    }
+    @GetMapping("/ScreenTree")
+    public String screenTree(Model model) {
+        SettingVO vo = SettingUtils.read();
+        model.addAttribute("vo", vo);
+        return "tree/screen";
+    }
+
     @GetMapping("/Resource")
     public String resource(Model model) {
         SettingVO vo = SettingUtils.read();
