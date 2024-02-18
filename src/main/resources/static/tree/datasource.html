@@ -19,11 +19,11 @@
     xhr.onreadystatechange = function () {
       if (xhr.readyState == 4 && xhr.status == 200) {
         const token = xhr.response
-        DataEaseBi.create('Datasource', {
+        const dataease = new DataEaseBi('Datasource', {
           baseUrl: domain,
           token: token
         })
-        DataEaseBi.initialize({ container: '#app' })
+        dataease.initialize({ container: '#app' })
       }
     }
     xhr.open('get', url, true);

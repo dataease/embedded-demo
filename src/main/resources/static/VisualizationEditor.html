@@ -35,13 +35,13 @@
     xhr.onreadystatechange = function () {
       if (xhr.readyState == 4 && xhr.status == 200) {
         const token = xhr.response
-        DataEaseBi.create('VisualizationEditor', {
+        const dataease = new DataEaseBi('VisualizationEditor', {
           baseUrl: domain,
           token: token,
           dvId: dvId,
           opt: opt
         })
-        DataEaseBi.initialize({container: '#dataease-container'})
+        dataease.initialize({container: '#dataease-container'})
       }
     }
     xhr.open('get', url, true);
