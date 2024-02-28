@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>flushbonading</title>
+</head>
+<style>
+  #de-view-container {
+    display: inline-flex;
+    width: 500px;
+    height: 500px;
+    overflow: auto;
+  }
+  .view-iframe {
+    width: 100%;
+    border: 0;
+    height: calc(100% - 5px);
+  }
+</style>
+<body>
+
+<div id="de-view-container">
+  <iframe id="de-view-iframe" src="" class="view-iframe"></iframe>
+</div>
+
+</body>
+<script th:inline="javascript" type="module">
+  window.onload = () => {
+    var xhr = new XMLHttpRequest();
+    var account = [[${vo.account}]]
+    var url = `/token/${account}`
+    var busiFlag = 'dashboard'
+    var dvId = [[${vo.dashboardId}]]
+    var domain = [[${vo.domain}]]
+    var type = 'Dashboard'
+    xhr.onreadystatechange = function () {
+      if (xhr.readyState == 4 && xhr.status == 200) {
+        const token = xhr.response
+        let url = domain + "#/chart-view?"
+        const params = {
+          busiFlag: busiFlag,
+          dvId: dvId,
+          type: type,
+          embeddedToken: token
+        }
+        for (const paramsKey in params) {
+          const val = params[paramsKey]
+          let tempUrl = `${paramsKey}=${val}`
+          if (!url.endsWith("?")) {
+            tempUrl = "&" + tempUrl
+          }
+          url += tempUrl
+        }
+        document.getElementById("de-view-iframe").src = url
+      }
+    }
+    xhr.open('get', url, true);
+    xhr.send();
+  }
+</script>
+
+</html>

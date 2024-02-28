@@ -30,12 +30,24 @@ public class PageController {
         model.addAttribute("vo", vo);
         return "DashboardView";
     }
+    @GetMapping("/DashboardViewIframe")
+    public String dashboardIframe(Model model) {
+        SettingVO vo = SettingUtils.read();
+        model.addAttribute("vo", vo);
+        return "iframe/DashboardView";
+    }
 
     @GetMapping("/VisualizationView")
     public String screen(Model model) {
         SettingVO vo = SettingUtils.read();
         model.addAttribute("vo", vo);
         return "VisualizationView";
+    }
+    @GetMapping("/VisualizationViewIframe")
+    public String screenIframe(Model model) {
+        SettingVO vo = SettingUtils.read();
+        model.addAttribute("vo", vo);
+        return "iframe/VisualizationView";
     }
 
     @GetMapping("/DashboardEditor")
@@ -44,12 +56,24 @@ public class PageController {
         model.addAttribute("vo", vo);
         return "DashboardEditor";
     }
+    @GetMapping("/DashboardEditorIframe")
+    public String dashboardEditIframe(Model model) {
+        SettingVO vo = SettingUtils.read();
+        model.addAttribute("vo", vo);
+        return "iframe/DashboardEditor";
+    }
 
     @GetMapping("/VisualizationEditor")
     public String screenEdit(Model model) {
         SettingVO vo = SettingUtils.read();
         model.addAttribute("vo", vo);
         return "VisualizationEditor";
+    }
+    @GetMapping("/VisualizationEditorIframe")
+    public String screenEditIframe(Model model) {
+        SettingVO vo = SettingUtils.read();
+        model.addAttribute("vo", vo);
+        return "iframe/VisualizationEditor";
     }
 
     @GetMapping("/view")
@@ -58,12 +82,11 @@ public class PageController {
         model.addAttribute("vo", vo);
         return "view";
     }
-
     @GetMapping("/ViewIframe")
     public String viewIframe(Model model) {
         SettingVO vo = SettingUtils.read();
         model.addAttribute("vo", vo);
-        return "ViewIframe";
+        return "iframe/View";
     }
 
     @GetMapping("/DatasourceTree")
@@ -72,11 +95,23 @@ public class PageController {
         model.addAttribute("vo", vo);
         return "tree/datasource";
     }
+    @GetMapping("/DatasourceTreeIframe")
+    public String datasourceTreeIframe(Model model) {
+        SettingVO vo = SettingUtils.read();
+        model.addAttribute("vo", vo);
+        return "iframe/tree/datasource";
+    }
     @GetMapping("/DatasetTree")
     public String datasetTree(Model model) {
         SettingVO vo = SettingUtils.read();
         model.addAttribute("vo", vo);
         return "tree/dataset";
+    }
+    @GetMapping("/DatasetTreeIframe")
+    public String datasetTreeIframe(Model model) {
+        SettingVO vo = SettingUtils.read();
+        model.addAttribute("vo", vo);
+        return "iframe/tree/dataset";
     }
     @GetMapping("/PanelTree")
     public String panelTree(Model model) {
@@ -84,19 +119,23 @@ public class PageController {
         model.addAttribute("vo", vo);
         return "tree/panel";
     }
+    @GetMapping("/PanelTreeIframe")
+    public String panelTreeIframe(Model model) {
+        SettingVO vo = SettingUtils.read();
+        model.addAttribute("vo", vo);
+        return "iframe/tree/panel";
+    }
     @GetMapping("/ScreenTree")
     public String screenTree(Model model) {
         SettingVO vo = SettingUtils.read();
         model.addAttribute("vo", vo);
         return "tree/screen";
     }
-
-    @GetMapping("/Resource")
-    public String resource(Model model) {
+    @GetMapping("/ScreenTreeIframe")
+    public String screenTreeIframe(Model model) {
         SettingVO vo = SettingUtils.read();
         model.addAttribute("vo", vo);
-        return "Resource";
+        return "iframe/tree/screen";
     }
-
 
 }

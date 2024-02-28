@@ -17,6 +17,7 @@
         top: 60px;
         height: calc(100% - 60px);
     }
+
     .main-iframe {
         width: 100%;
         border: 0;
@@ -28,42 +29,109 @@
 <ul class="layui-nav">
     <li class="layui-nav-item layui-this"><a href="javascript:switchMain(0);">系统设置</a></li>
 
-    <li th:if="${vo.domain != null && !#strings.isEmpty(vo.dashboardId) && !#strings.isEmpty(vo.appId)}" class="layui-nav-item"><a href="javascript:switchMain(1);">仪表板预览</a></li>
-    <li th:if="${vo.domain != null && !#strings.isEmpty(vo.screenId) && !#strings.isEmpty(vo.appId)}" class="layui-nav-item"><a href="javascript:switchMain(2);">大屏预览</a></li>
-    <li th:if="${vo.domain != null && !#strings.isEmpty(vo.dashboardId) && !#strings.isEmpty(vo.appId)}" class="layui-nav-item"><a href="javascript:switchMain(3);">仪表板编辑</a></li>
-    <li th:if="${vo.domain != null && !#strings.isEmpty(vo.screenId) && !#strings.isEmpty(vo.appId)}" class="layui-nav-item"><a href="javascript:switchMain(4);">大屏编辑</a></li>
-    <li th:if="${vo.domain != null && !#strings.isEmpty(vo.viewResourceId) && !#strings.isEmpty(vo.viewId) && !#strings.isEmpty(vo.appId)}" class="layui-nav-item"><a href="javascript:switchMain(5);">视图预览</a></li>
-    <li th:if="${vo.domain != null && !#strings.isEmpty(vo.viewResourceId) && !#strings.isEmpty(vo.viewId) && !#strings.isEmpty(vo.appId)}" class="layui-nav-item"><a href="javascript:switchMain(6);">视图预览(iframe)</a></li>
+    <li th:if="${vo.domain != null && !#strings.isEmpty(vo.dashboardId) && !#strings.isEmpty(vo.appId)}"
+        class="layui-nav-item">
+        <a href="javascript:;">仪表板预览</a>
+        <dl class="layui-nav-child">
+            <dd><a href="javascript:switchMain(1);">div嵌入</a></dd>
+            <dd><a href="javascript:switchMain(11);">iframe嵌入</a></dd>
+        </dl>
+    </li>
+    <li th:if="${vo.domain != null && !#strings.isEmpty(vo.screenId) && !#strings.isEmpty(vo.appId)}"
+        class="layui-nav-item">
+        <a href="javascript:;">大屏预览</a>
+        <dl class="layui-nav-child">
+            <dd><a href="javascript:switchMain(2);">div嵌入</a></dd>
+            <dd><a href="javascript:switchMain(12);">iframe嵌入</a></dd>
+        </dl>
+    </li>
+    <li th:if="${vo.domain != null && !#strings.isEmpty(vo.dashboardId) && !#strings.isEmpty(vo.appId)}"
+        class="layui-nav-item">
+        <a href="javascript:;">仪表板编辑</a>
+        <dl class="layui-nav-child">
+            <dd><a href="javascript:switchMain(3);">div嵌入</a></dd>
+            <dd><a href="javascript:switchMain(13);">iframe嵌入</a></dd>
+        </dl>
+    </li>
+    <li th:if="${vo.domain != null && !#strings.isEmpty(vo.screenId) && !#strings.isEmpty(vo.appId)}"
+        class="layui-nav-item">
+        <a href="javascript:;">大屏编辑</a>
+        <dl class="layui-nav-child">
+            <dd><a href="javascript:switchMain(4);">div嵌入</a></dd>
+            <dd><a href="javascript:switchMain(14);">iframe嵌入</a></dd>
+        </dl>
+    </li>
+    <li th:if="${vo.domain != null && !#strings.isEmpty(vo.viewResourceId) && !#strings.isEmpty(vo.viewId) && !#strings.isEmpty(vo.appId)}"
+        class="layui-nav-item">
+        <a href="javascript:;">视图预览</a>
+        <dl class="layui-nav-child">
+            <dd><a href="javascript:switchMain(5);">div嵌入</a></dd>
+            <dd><a href="javascript:switchMain(6);">iframe嵌入</a></dd>
+        </dl>
+    </li>
 
-    <li th:if="${vo.domain != null && !#strings.isEmpty(vo.appId)}" class="layui-nav-item"><a href="javascript:switchMain(7);">数据源树</a></li>
-    <li th:if="${vo.domain != null && !#strings.isEmpty(vo.appId)}" class="layui-nav-item"><a href="javascript:switchMain(8);">数据集树</a></li>
-    <li th:if="${vo.domain != null && !#strings.isEmpty(vo.appId)}" class="layui-nav-item"><a href="javascript:switchMain(9);">仪表板树</a></li>
-    <li th:if="${vo.domain != null && !#strings.isEmpty(vo.appId)}" class="layui-nav-item"><a href="javascript:switchMain(10);">大屏树</a></li>
-
-
-
-    <!--<li th:if="${vo.domain != null && !#strings.isEmpty(vo.appId)}" class="layui-nav-item"><a href="javascript:switchMain(6);">模拟场景</a></li>-->
+    <li th:if="${vo.domain != null && !#strings.isEmpty(vo.appId)}" class="layui-nav-item">
+        <a href="javascript:;">数据源树</a>
+        <dl class="layui-nav-child">
+            <dd><a href="javascript:switchMain(7);">div嵌入</a></dd>
+            <dd><a href="javascript:switchMain(17);">iframe嵌入</a></dd>
+        </dl>
+    </li>
+    <li th:if="${vo.domain != null && !#strings.isEmpty(vo.appId)}" class="layui-nav-item">
+        <a href="javascript:;">数据集树</a>
+        <dl class="layui-nav-child">
+            <dd><a href="javascript:switchMain(8);">div嵌入</a></dd>
+            <dd><a href="javascript:switchMain(18);">iframe嵌入</a></dd>
+        </dl>
+    </li>
+    <li th:if="${vo.domain != null && !#strings.isEmpty(vo.appId)}" class="layui-nav-item">
+        <a href="javascript:;">仪表板树</a>
+        <dl class="layui-nav-child">
+            <dd><a href="javascript:switchMain(9);">div嵌入</a></dd>
+            <dd><a href="javascript:switchMain(19);">iframe嵌入</a></dd>
+        </dl>
+    </li>
+    <li th:if="${vo.domain != null && !#strings.isEmpty(vo.appId)}" class="layui-nav-item">
+        <a href="javascript:;">大屏树</a>
+        <dl class="layui-nav-child">
+            <dd><a href="javascript:switchMain(10);">div嵌入</a></dd>
+            <dd><a href="javascript:switchMain(20);">iframe嵌入</a></dd>
+        </dl>
+    </li>
 </ul>
 
 <div class="main-div">
     <iframe id="main-iframe" class="main-iframe"></iframe>
 </div>
 <script>
-    layui.use('element', function(){
+    layui.use('element', function () {
         var element = layui.element;
-
         //监听导航点击
-        element.on('nav(demo)', function(elem){
+        element.on('nav(demo)', function (elem) {
             layer.msg(elem.text());
         });
     })
     var currentIndex = -1
-    var linkArray = ['Setting', 'DashboardView', 'VisualizationView', 'DashboardEditor', 'VisualizationEditor', 'view', 'ViewIframe', "DatasourceTree", "DatasetTree", "PanelTree", "ScreenTree"]
+    var linkArray = ['Setting', 'DashboardView', 'VisualizationView',
+        'DashboardEditor', 'VisualizationEditor', 'view', 'ViewIframe',
+        "DatasourceTree", "DatasetTree", "PanelTree", "ScreenTree",
+        "DashboardViewIframe", "VisualizationViewIframe", "DashboardEditorIframe",
+        "VisualizationEditorIframe", "", "", "DatasourceTreeIframe", "DatasetTreeIframe",
+        "PanelTreeIframe", "ScreenTreeIframe"
+    ]
     var switchMain = index => {
         if (currentIndex === index) return
         var url = linkArray[index] + '?=' + (new Date()).getTime()
         document.getElementById("main-iframe").src = url
         currentIndex = index
+        var lightIndex = currentIndex % 10
+        if (currentIndex === 10 || currentIndex === 20) {
+            lightIndex = 10
+        }
+        if (lightIndex > 5) {
+            lightIndex--
+        }
+        document.getElementsByClassName('layui-nav-item')[lightIndex].classList.add('layui-this')
     }
     window.onload = () => {
         switchMain(0)
