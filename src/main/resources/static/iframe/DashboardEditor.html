@@ -8,24 +8,9 @@
   <title>flushbonading</title>
 </head>
 <style>
-  #de-view-container {
-    display: inline-flex;
-    width: 500px;
-    height: 500px;
-    overflow: auto;
-  }
-  .view-iframe {
-    width: 100%;
-    border: 0;
-    height: calc(100% - 5px);
-  }
 </style>
 <body>
-
-<div id="de-view-container">
-  <iframe id="de-view-iframe" src="" class="view-iframe"></iframe>
-</div>
-
+  <iframe height="600" width="1000" id="de-view-iframe" src="" ></iframe>
 </body>
 <script th:inline="javascript" type="module">
   window.onload = () => {
@@ -44,7 +29,8 @@
           busiFlag: busiFlag,
           dvId: dvId,
           type: type,
-          embeddedToken: token
+          embeddedToken: token,
+          opt: 'create'
         }
         for (const paramsKey in params) {
           const val = params[paramsKey]
