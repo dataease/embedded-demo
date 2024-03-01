@@ -20,6 +20,7 @@
     var busiFlag = 'dashboard'
     var dvId = [[${vo.dashboardId}]]
     var domain = [[${vo.domain}]]
+    var resourceId = [[${vo.resourceId}]]
     var type = 'DashboardEditor'
     xhr.onreadystatechange = function () {
       if (xhr.readyState == 4 && xhr.status == 200) {
@@ -27,10 +28,10 @@
         let url = domain + "#/chart-view?"
         const params = {
           busiFlag: busiFlag,
+          resourceId: resourceId,
           dvId: dvId,
           type: type,
-          embeddedToken: token,
-          opt: 'create'
+          embeddedToken: token
         }
         for (const paramsKey in params) {
           const val = params[paramsKey]
