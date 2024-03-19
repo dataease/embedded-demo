@@ -42,15 +42,17 @@
           type: type,
           embeddedToken: token
         }
-        for (const paramsKey in params) {
-          const val = params[paramsKey]
-          let tempUrl = `${paramsKey}=${val}`
-          if (!url.endsWith("?")) {
-            tempUrl = "&" + tempUrl
+        const iframe = document.getElementById("de-view-iframe")
+        iframe.src = url
+
+        window.addEventListener('message', event => {
+          if (event.data?.msgOrigin !== 'de-fit2cloud') {
+            return
           }
-          url += tempUrl
-        }
-        document.getElementById("de-view-iframe").src = url
+          params['de-embedded'] = true
+          var contentWindow = iframe.contentWindow;
+          contentWindow.postMessage(params, url)
+        })
       }
     }
     xhr.open('get', url, true);
