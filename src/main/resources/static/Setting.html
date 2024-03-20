@@ -27,10 +27,28 @@
   .button-container {
     float: right;
   }
+  .layui-collapse {
+    margin-bottom: 16px;
+  }
+  .layui-colla-title {
+    color: red;
+  }
 </style>
 <body>
+
 <!-- 给容器追加 class="layui-form-pane"，即可显示为方框风格 -->
 <form class="layui-form layui-form-pane setting" action="">
+  <div class="layui-collapse" lay-accordion>
+    <div class="layui-colla-item">
+      <div class="layui-colla-title">v2.5.0更新提示！</div>
+      <div class="layui-colla-content">
+        自v2.5.0版本开始iframe方式嵌入与之前版本做如下改动，
+        SearchParams方式传参改为postMessage方式，具体请看代码
+        <br/>
+        <img alt="" class="embedded-demo-code" src="./img/demo-code.jpg" />
+      </div>
+    </div>
+  </div>
   <div class="layui-form-item">
     <label class="layui-form-label">DataEase服务</label>
     <div class="layui-input-block">

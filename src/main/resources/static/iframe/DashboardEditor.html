@@ -25,11 +25,10 @@
     xhr.onreadystatechange = function () {
       if (xhr.readyState == 4 && xhr.status == 200) {
         const token = xhr.response
-        let url = domain + "#/chart-view?"
+        let url = domain + "#/chart-view"
         const params = {
           busiFlag: busiFlag,
           resourceId: resourceId,
-          dvId: dvId,
           type: type,
           embeddedToken: token
         }
