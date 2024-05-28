@@ -3,17 +3,44 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link href="//unpkg.com/layui@2.9.0/dist/css/layui.css" rel="stylesheet">
   <title>adc</title>
   <style>
     #app {
       height: 800px;
       width: 1000px;
     }
+    .setting {
+      padding: 40px;
+    }
+    .layui-form-label {
+      width: 200px !important;
+    }
+    .layui-input-block {
+      margin-left: 200px !important;
+    }
+    .button-container {
+      float: right;
+    }
   </style>
   <script crossorigin  type="module" th:src="@{{domain}js/div_import_0.0.0-dataease.js(domain=${vo.domain})}"></script>
+  <script src="//unpkg.com/layui@2.9.0/dist/layui.js"></script>
 </head>
 <body>
-<div id="app"></div>
+<div style="width: 100%;height: 100%">
+  <form class="layui-form layui-form-pane setting" style="display: flex" action="">
+    <div class="layui-form-item" style="width: 80%;margin-right: 20px;">
+      <label class="layui-form-label">预览发送参数</label>
+      <div class="layui-input-block">
+        <input type="text" name="sendParams" th:value="${vo.sendParams}" autocomplete="off" placeholder="请输入" class="layui-input">
+      </div>
+    </div>
+    <div class="layui-form-item button-container">
+      <button class="layui-btn" lay-submit lay-filter="demo3">参数发送</button>
+    </div>
+  </form>
+  <div id="app"></div>
+</div>
 
 </body>
 <script th:inline="javascript" type="module">
@@ -24,6 +51,7 @@
     var dvId = [[${vo.dashboardId}]]
     var busiFlag = "dashboard"
     var domain = [[${vo.domain}]]
+    var outerParams = [[${vo.outerParams}]]
     xhr.onreadystatechange = function () {
       if (xhr.readyState == 4 && xhr.status == 200) {
         const token = xhr.response
@@ -31,7 +59,8 @@
           baseUrl: domain,
           token: token,
           dvId: dvId,
-          busiFlag: busiFlag
+          busiFlag: busiFlag,
+          outerParams: outerParams
         })
         dataease.initialize({ container: '#app' })
       }
@@ -40,6 +69,19 @@
     xhr.send();
   }
 
+
+  var layer = null;
+  layui.use(['form'], function(){
+    var form = layui.form;
+    layer = layui.layer;
+    // 提交事件
+    form.on('submit(demo3)', function(data){
+      var field = data.field;
+      console.log('send: ' + JSON.stringify(field.sendParams))
+      window.postMessage(JSON.parse(field.sendParams), '*')
+      return false;
+    });
+  });
 
 
 </script>

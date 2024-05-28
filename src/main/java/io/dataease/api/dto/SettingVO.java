@@ -25,6 +25,26 @@ public class SettingVO implements Serializable {
 
     private String viewBusiFlag;
 
+    private String outerParams;
+
+    private String sendParams;
+
+    public String getSendParams() {
+        return sendParams;
+    }
+
+    public void setSendParams(String sendParams) {
+        this.sendParams = sendParams;
+    }
+
+    public String getOuterParams() {
+        return outerParams;
+    }
+
+    public void setOuterParams(String outerParams) {
+        this.outerParams = outerParams;
+    }
+
     public String getDomain() {
         return domain;
     }

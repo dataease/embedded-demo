@@ -109,6 +109,20 @@
     </div>
   </div>
 
+  <div class="layui-form-item">
+    <label class="layui-form-label">预览初始化参数</label>
+    <div class="layui-input-block">
+      <input type="text" name="outerParams" th:value="${vo.outerParams}" autocomplete="off" placeholder="请输入" class="layui-input">
+    </div>
+  </div>
+
+  <div class="layui-form-item">
+    <label class="layui-form-label">预览时发送参数</label>
+    <div class="layui-input-block">
+      <input type="text" name="sendParams" th:value="${vo.sendParams}" autocomplete="off" placeholder="请输入" class="layui-input">
+    </div>
+  </div>
+
   <div class="layui-form-item" pane>
     <label class="layui-form-label">默认视图所属资源类型</label>
     <div class="layui-input-block">

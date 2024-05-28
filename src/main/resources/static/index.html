@@ -135,6 +135,16 @@
     }
     window.onload = () => {
         switchMain(0)
+
+        window.addEventListener('message', event => {
+            console.log("内部消息2："+JSON.stringify(event.data))
+            if (event.data?.type === 'de_inner_params') {
+                console.log("内部消息："+JSON.stringify(event.data))
+                alert('DataEase 内部消息：'+JSON.stringify(event.data))
+            }
+
+        })
+
     }
 
 </script>
