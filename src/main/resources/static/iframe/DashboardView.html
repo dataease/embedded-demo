@@ -37,7 +37,7 @@
 <body>
 <form class="layui-form layui-form-pane setting" style="display: flex" action="">
   <div class="layui-form-item" style="width: 80%;margin-right: 20px;">
-    <label class="layui-form-label">预览发送参数</label>
+    <label class="layui-form-label">预览发送参数1</label>
     <div class="layui-input-block">
       <input type="text" name="sendParams" th:value="${vo.sendParams}" autocomplete="off" placeholder="请输入" class="layui-input">
     </div>
@@ -73,12 +73,17 @@
         iframe.src = url
 
         window.addEventListener('message', event => {
-          if (event.data?.msgOrigin !== 'de-fit2cloud') {
-            return
+          if (event.data?.eventName === 'de_inner_params') {
+            console.log("内部消息 Iframe DashboardView："+JSON.stringify(event.data))
+            alert('DataEase 内部消息 Iframe DashboardView：'+JSON.stringify(event.data))
+          }else {
+            if (event.data?.msgOrigin !== 'de-fit2cloud') {
+              return
+            }
+            params['de-embedded'] = true
+            var contentWindow = iframe.contentWindow;
+            contentWindow.postMessage(params, url)
           }
-          params['de-embedded'] = true
-          var contentWindow = iframe.contentWindow;
-          contentWindow.postMessage(params, url)
         })
       }
     }
