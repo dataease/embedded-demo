@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 
@@ -32,7 +33,10 @@ public class TokenApi {
         List<String> ipList = new ArrayList<>();
         ipList.add("192.168.1.10");
         ipList.add("192.168.1.20");
-        builder.withClaim("account", account).withClaim("appId", vo.getAppId()).withClaim("arg1", "果粒果汁").withClaim("arg2", ipList);
+        ObjectMapper objectMapper = new ObjectMapper();
+        String json = objectMapper.writeValueAsString(ipList);
+        builder.withClaim("account", account).withClaim("appId", vo.getAppId()).withClaim("arg1", "果粒果汁").withClaim("arg2", json);
+        builder.withIssuedAt(new Date());
         return builder.sign(algorithm);
     }
 }
