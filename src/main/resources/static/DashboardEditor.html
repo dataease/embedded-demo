@@ -22,7 +22,7 @@
 
 <div id="dataease-container">
 </div>
-
+<div id="switch">切换</div>
 </body>
 <script th:inline="javascript" type="module">
     window.onload = () => {
@@ -32,10 +32,11 @@
         var resourceId = [[${vo.dashboardId}]]
         var opt = "create" //固定写法
         var domain = [[${vo.domain}]]
+        let dataease = null
         xhr.onreadystatechange = function () {
             if (xhr.readyState == 4 && xhr.status == 200) {
                 const token = xhr.response
-                const dataease = new DataEaseBi('DashboardEditor', {
+                dataease = new DataEaseBi('DashboardEditor', {
                     baseUrl: domain,
                     token: token,
                     resourceId: resourceId,
@@ -46,6 +47,11 @@
         }
         xhr.open('get', url, true);
         xhr.send();
+
+        document.querySelector('#switch').addEventListener('click', () => {
+            console.log('dataease', dataease)
+            dataease.destroy()
+        })
     }
 
 
