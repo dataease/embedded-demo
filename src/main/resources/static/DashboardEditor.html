@@ -33,9 +33,10 @@
         var opt = "create" //固定写法
         var domain = [[${vo.domain}]]
         let dataease = null
+        let token = ''
         xhr.onreadystatechange = function () {
             if (xhr.readyState == 4 && xhr.status == 200) {
-                const token = xhr.response
+                token = xhr.response
                 dataease = new DataEaseBi('DashboardEditor', {
                     baseUrl: domain,
                     token: token,
