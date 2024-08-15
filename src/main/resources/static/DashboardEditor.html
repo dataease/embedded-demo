@@ -51,6 +51,16 @@
         document.querySelector('#switch').addEventListener('click', () => {
             console.log('dataease', dataease)
             dataease.destroy()
+
+            setTimeout(() => {
+                dataease = new DataEaseBi('DashboardEditor', {
+                    baseUrl: domain,
+                    token: token,
+                    resourceId: resourceId,
+                    opt: opt
+                })
+                dataease.initialize({container: '#dataease-container'})
+            }, 5000)
         })
     }
 
