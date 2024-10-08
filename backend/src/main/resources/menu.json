@@ -1,0 +1,433 @@
+[
+  {
+    "path": "/home/index",
+    "component": "/home/index",
+    "meta": {
+      "isLink": "",
+      "isKeepAlive": false,
+      "icon": "front_page",
+      "isAffix": true,
+      "isFull": false,
+      "title": "首页",
+      "isHide": false
+    },
+    "name": "home",
+    "index": 0
+  },
+  {
+    "path": "/div",
+    "children": [
+      {
+        "path": "/div/result",
+        "children": [
+          {
+            "path": "/div/result/dashboard",
+            "component": "/div/result/dashboard/index",
+            "meta": {
+              "isLink": "",
+              "isKeepAlive": false,
+              "icon": "dashboard_iframe",
+              "isAffix": false,
+              "isFull": false,
+              "title": "仪表板嵌入",
+              "isHide": false
+            },
+            "name": "divDashboard",
+            "index": 0
+          },
+          {
+            "path": "/div/result/dataV",
+            "component": "/div/result/dataV/index",
+            "meta": {
+              "isLink": "",
+              "isKeepAlive": false,
+              "icon": "datav_iframe",
+              "isAffix": false,
+              "isFull": false,
+              "title": "数据大屏嵌入",
+              "isHide": false
+            },
+            "name": "divDataV",
+            "index": 1
+          },
+          {
+            "path": "/div/result/view",
+            "component": "/div/result/view/index",
+            "meta": {
+              "isLink": "",
+              "isKeepAlive": false,
+              "icon": "view",
+              "isAffix": false,
+              "isFull": false,
+              "title": "图表嵌入",
+              "isHide": false
+            },
+            "name": "divView",
+            "index": 4
+          }
+        ],
+        "meta": {
+          "isLink": "",
+          "isKeepAlive": false,
+          "icon": "result",
+          "isAffix": false,
+          "isFull": false,
+          "title": "结果嵌入",
+          "isHide": false
+        },
+        "name": "result",
+        "index": 0
+      },
+
+      {
+        "path": "/div/designer",
+        "children": [
+          {
+            "path": "/div/designer/dashboardDesign",
+            "component": "/div/designer/dashboardDesign/index",
+            "meta": {
+              "isLink": "",
+              "isKeepAlive": false,
+              "icon": "dashboard_design",
+              "isAffix": false,
+              "isFull": false,
+              "title": "仪表板设计器嵌入",
+              "isHide": false
+            },
+            "name": "divDashboardDesign",
+            "index": 0
+          },
+          {
+            "path": "/div/designer/dataVDesign",
+            "component": "/div/designer/dataVDesign/index",
+            "meta": {
+              "isLink": "",
+              "isKeepAlive": false,
+              "icon": "datav_design",
+              "isAffix": false,
+              "isFull": false,
+              "title": "数据大屏设计器嵌入",
+              "isHide": false
+            },
+            "name": "divDataVDesign",
+            "index": 1
+          }
+        ],
+        "meta": {
+          "isLink": "",
+          "isKeepAlive": false,
+          "icon": "designer",
+          "isAffix": false,
+          "isFull": false,
+          "title": "设计器嵌入",
+          "isHide": false
+        },
+        "name": "designer",
+        "index": 1
+      },
+
+      {
+        "path": "/div/module",
+        "children": [
+          {
+            "path": "/div/module/dashboard_module",
+            "component": "/div/module/dashboard_module/index",
+            "meta": {
+              "isLink": "",
+              "isKeepAlive": false,
+              "icon": "dashboard_module",
+              "isAffix": false,
+              "isFull": false,
+              "title": "仪表板模块",
+              "isHide": false
+            },
+            "name": "divDashboard_module",
+            "index": 0
+          },
+          {
+            "path": "/div/module/dataV_module",
+            "component": "/div/module/dataV_module/index",
+            "meta": {
+              "isLink": "",
+              "isKeepAlive": false,
+              "icon": "datav_module",
+              "isAffix": false,
+              "isFull": false,
+              "title": "数据大屏模块",
+              "isHide": false
+            },
+            "name": "divDataV_module",
+            "index": 1
+          },
+          {
+            "path": "/div/module/dataset_module",
+            "component": "/div/module/dataset_module/index",
+            "meta": {
+              "isLink": "",
+              "isKeepAlive": false,
+              "icon": "dataset_module",
+              "isAffix": false,
+              "isFull": false,
+              "title": "数据集模块",
+              "isHide": false
+            },
+            "name": "divDataset_module",
+            "index": 2
+          },
+          {
+            "path": "/div/module/datasource_module",
+            "component": "/div/module/datasource_module/index",
+            "meta": {
+              "isLink": "",
+              "isKeepAlive": false,
+              "icon": "datasource_module",
+              "isAffix": false,
+              "isFull": false,
+              "title": "数据源模块",
+              "isHide": false
+            },
+            "name": "divDatasource_module",
+            "index": 3
+          }
+        ],
+        "meta": {
+          "isLink": "",
+          "isKeepAlive": false,
+          "icon": "module",
+          "isAffix": false,
+          "isFull": false,
+          "title": "模块嵌入",
+          "isHide": false
+        },
+        "name": "module",
+        "index": 2
+      }
+
+    ],
+    "meta": {
+      "isLink": "",
+      "isKeepAlive": false,
+      "icon": "div",
+      "isAffix": false,
+      "isFull": false,
+      "title": "DIV&ensp;嵌入",
+      "isHide": false
+    },
+    "name": "div",
+    "index": 1
+  },
+  {
+    "path": "/iframe",
+    "children": [
+      {
+        "path": "/iframe/result",
+        "children": [
+          {
+            "path": "/iframe/result/dashboard",
+            "component": "/iframe/result/dashboard/index",
+            "meta": {
+              "isLink": "",
+              "isKeepAlive": false,
+              "icon": "dashboard_iframe",
+              "isAffix": false,
+              "isFull": false,
+              "title": "仪表板嵌入",
+              "isHide": false
+            },
+            "name": "iframeDashboard",
+            "index": 0
+          },
+          {
+            "path": "/iframe/result/dataV",
+            "component": "/iframe/result/dataV/index",
+            "meta": {
+              "isLink": "",
+              "isKeepAlive": false,
+              "icon": "datav_iframe",
+              "isAffix": false,
+              "isFull": false,
+              "title": "数据大屏嵌入",
+              "isHide": false
+            },
+            "name": "iframeDataV",
+            "index": 1
+          },
+          {
+            "path": "/iframe/result/view",
+            "component": "/iframe/result/view/index",
+            "meta": {
+              "isLink": "",
+              "isKeepAlive": false,
+              "icon": "view",
+              "isAffix": false,
+              "isFull": false,
+              "title": "图表嵌入",
+              "isHide": false
+            },
+            "name": "iframeView",
+            "index": 4
+          }
+        ],
+        "meta": {
+          "isLink": "",
+          "isKeepAlive": false,
+          "icon": "result",
+          "isAffix": false,
+          "isFull": false,
+          "title": "结果嵌入",
+          "isHide": false
+        },
+        "name": "result",
+        "index": 0
+      },
+      {
+        "path": "/iframe/designer",
+        "children": [
+          {
+            "path": "/iframe/designer/dashboardDesign",
+            "component": "/iframe/designer/dashboardDesign/index",
+            "meta": {
+              "isLink": "",
+              "isKeepAlive": false,
+              "icon": "dashboard_design",
+              "isAffix": false,
+              "isFull": false,
+              "title": "仪表板设计器嵌入",
+              "isHide": false
+            },
+            "name": "iframeDashboardDesign",
+            "index": 0
+          },
+          {
+            "path": "/iframe/designer/dataVDesign",
+            "component": "/iframe/designer/dataVDesign/index",
+            "meta": {
+              "isLink": "",
+              "isKeepAlive": false,
+              "icon": "datav_design",
+              "isAffix": false,
+              "isFull": false,
+              "title": "数据大屏设计器嵌入",
+              "isHide": false
+            },
+            "name": "iframeDataVDesign",
+            "index": 1
+          }
+        ],
+        "meta": {
+          "isLink": "",
+          "isKeepAlive": false,
+          "icon": "designer",
+          "isAffix": false,
+          "isFull": false,
+          "title": "设计器嵌入",
+          "isHide": false
+        },
+        "name": "designer",
+        "index": 1
+      },
+      {
+        "path": "/iframe/module",
+        "children": [
+          {
+            "path": "/iframe/module/dashboard_module",
+            "component": "/iframe/module/dashboard_module/index",
+            "meta": {
+              "isLink": "",
+              "isKeepAlive": false,
+              "icon": "dashboard_module",
+              "isAffix": false,
+              "isFull": false,
+              "title": "仪表板模块",
+              "isHide": false
+            },
+            "name": "iframeDashboard_module",
+            "index": 0
+          },
+          {
+            "path": "/iframe/module/dataV_module",
+            "component": "/iframe/module/dataV_module/index",
+            "meta": {
+              "isLink": "",
+              "isKeepAlive": false,
+              "icon": "datav_module",
+              "isAffix": false,
+              "isFull": false,
+              "title": "数据大屏模块",
+              "isHide": false
+            },
+            "name": "iframeDataV_module",
+            "index": 1
+          },
+          {
+            "path": "/iframe/module/dataset_module",
+            "component": "/iframe/module/dataset_module/index",
+            "meta": {
+              "isLink": "",
+              "isKeepAlive": false,
+              "icon": "dataset_module",
+              "isAffix": false,
+              "isFull": false,
+              "title": "数据集模块",
+              "isHide": false
+            },
+            "name": "iframeDataset_module",
+            "index": 2
+          },
+          {
+            "path": "/iframe/module/datasource_module",
+            "component": "/iframe/module/datasource_module/index",
+            "meta": {
+              "isLink": "",
+              "isKeepAlive": false,
+              "icon": "datasource_module",
+              "isAffix": false,
+              "isFull": false,
+              "title": "数据源模块",
+              "isHide": false
+            },
+            "name": "iframeDatasource_module",
+            "index": 3
+          }
+        ],
+        "meta": {
+          "isLink": "",
+          "isKeepAlive": false,
+          "icon": "module",
+          "isAffix": false,
+          "isFull": false,
+          "title": "模块嵌入",
+          "isHide": false
+        },
+        "name": "module",
+        "index": 2
+      }
+    ],
+    "meta": {
+      "isLink": "",
+      "isKeepAlive": false,
+      "icon": "iframe",
+      "isAffix": false,
+      "isFull": false,
+      "title": "iframe&ensp;嵌入",
+      "isHide": false
+    },
+    "name": "iframe",
+    "index": 2
+  },
+  {
+    "path": "/simulated",
+    "component": "/simulated/index",
+    "meta": {
+      "isLink": "",
+      "isKeepAlive": false,
+      "icon": "simulated",
+      "isAffix": true,
+      "isFull": false,
+      "title": "模拟登录",
+      "isHide": false
+    },
+    "name": "simulated",
+    "index": 0
+  }
+]

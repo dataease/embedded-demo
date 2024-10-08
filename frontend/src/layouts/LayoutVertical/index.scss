@@ -1,0 +1,53 @@
+.el-container {
+  width: 100%;
+  height: 100%;
+  :deep(.el-aside) {
+    width: auto;
+    background-color: var(--el-menu-bg-color);
+    border-right: 1px solid var(--el-aside-border-color);
+    .aside-box {
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+      transition: width 0.3s ease;
+      .el-scrollbar {
+        height: 100%;
+        .el-menu {
+          width: 100%;
+          overflow-x: hidden;
+          border-right: none;
+        }
+      }
+    }
+  }
+}
+.logo {
+  box-sizing: border-box;
+  height: 55px;
+  .logo-img {
+    width: 120px;
+    object-fit: contain;
+    margin-right: 8px;
+  }
+  .logo-text {
+    font-size: 21.5px;
+    font-weight: bold;
+    color: white;
+    white-space: nowrap;
+    font-family: "阿里巴巴普惠体 3.0 55 Regular L3";
+    -webkit-font-smoothing: antialiased;
+    text-size-adjust: 100%;
+    font-synthesis: none;
+    // font-weight: 400;
+  }
+}
+.el-header {
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 55px;
+  padding: 0 15px;
+  background-color: #426DF2;
+  border-bottom: 1px solid var(--el-header-border-color);
+}

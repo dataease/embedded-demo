@@ -1,0 +1,124 @@
+.headclass {
+  box-sizing: border-box;
+  width: 100%;
+  height: 40px;
+  line-height: 30px;
+  background-image: url("@/assets/images/headbj.png");
+  background-repeat:round;
+  padding-left: 10px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.el-dropdown-link {
+  cursor: pointer;
+  color: var(--el-color-primary);
+  display: flex;
+  align-items: center;
+  margin-right: 1vh; 
+  margin-left: 0.5vh; 
+  font-size: 15px; 
+  font-weight: 550;
+  color: #426df2
+}
+
+.card-iframe {
+  box-sizing: border-box;
+  height: 100%;
+  width: 100%;
+  color: #455D6F;
+  fill: #ffffff;
+  font-size: 0.6em;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+
+.headLeft {
+  color: #fff;
+  font-size: 16px;
+  font-weight: 700;
+  width: 18vh;
+  height: 40px;
+  line-height: 40px;
+  margin-right: 50px;
+}
+
+.icon {
+  width: 23.75%; 
+  height: 30%;   
+  margin-left: 1%;
+}
+
+.svg_text {
+  text-align: center; 
+  margin-top: 10px;
+}
+
+.cardButton {
+  background-color: #426DF2;
+  border: none;
+  border-radius: 5px;
+  color: #fff;
+  cursor: pointer;
+  height: 30px;
+  line-height: 30px;
+  margin-left: 10px;
+  width: 105px;
+  text-align: center;
+}
+
+:deep(.el-card__header) {
+  padding: 10px 10px;
+}
+
+:deep(.el-card__body) {
+  padding: 10px 10px;
+}
+
+#de-view-container {
+  display: inline-flex;
+  width: 100%;
+  height: 39vh;
+  overflow: auto;
+}
+.view-iframe {
+  width: 100%;
+  border: 0;
+  height: 100%;
+}
+
+.textClass {
+  color: #666;
+  display: flex;
+  flex: 1 1 30px;
+  flex-direction: column;
+  font-size: 13px;
+  justify-content: center
+}
+
+.content-box1 {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  height: 100%;
+  .text {
+    margin: 20px 0 30px;
+    font-size: 23px;
+    font-weight: bold;
+    color: var(--el-text-color-regular);
+  }
+  .el-descriptions {
+    width: 100%;
+    padding: 40px 0 0;
+    .el-descriptions__title {
+      font-size: 18px;
+    }
+    .el-descriptions__label {
+      width: 200px;
+    }
+  }
+}
