@@ -138,4 +138,46 @@ public class PageController {
         return "iframe/tree/screen";
     }
 
+    @GetMapping("/DataFillingTree")
+    public String dataFillingTree(Model model) {
+        SettingVO vo = SettingUtils.read();
+        model.addAttribute("vo", vo);
+        return "tree/dataFilling";
+    }
+    @GetMapping("/DataFillingTreeIframe")
+    public String dataFillingTreeIframe(Model model) {
+        SettingVO vo = SettingUtils.read();
+        model.addAttribute("vo", vo);
+        return "iframe/tree/dataFilling";
+    }
+
+    @GetMapping("/DataFillingEditor")
+    public String dataFillingEditor(Model model) {
+        SettingVO vo = SettingUtils.read();
+        model.addAttribute("vo", vo);
+        return "DataFillingEditor";
+    }
+
+    @GetMapping("/DataFillingEditorIframe")
+    public String dataFillingEditorIframe(Model model) {
+        SettingVO vo = SettingUtils.read();
+        model.addAttribute("vo", vo);
+        return "iframe/DataFillingEditor";
+    }
+
+    @GetMapping("/DataFillingHandler")
+    public String dataFillingHandler(Model model) {
+        SettingVO vo = SettingUtils.read();
+        model.addAttribute("vo", vo);
+        return "DataFillingHandler";
+    }
+    @GetMapping("/DataFillingHandlerIframe")
+    public String dataFillingHandlerIframe(Model model) {
+        SettingVO vo = SettingUtils.read();
+        model.addAttribute("vo", vo);
+        return "iframe/DataFillingHandler";
+    }
+
+
+
 }

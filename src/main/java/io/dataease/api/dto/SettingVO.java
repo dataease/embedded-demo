@@ -22,6 +22,7 @@ public class SettingVO implements Serializable {
     private String viewResourceId;
 
     private String viewId;
+    private String dfId;
 
     private String viewBusiFlag;
 
@@ -117,12 +118,21 @@ public class SettingVO implements Serializable {
         this.appSecret = appSecret;
     }
 
-    public SettingVO(String domain, String account, String appId, String appSecret, String dashboardId, String screenId, String viewResourceId, String viewId, String viewBusiFlag) {
+    public String getDfId() {
+        return dfId;
+    }
+
+    public void setDfId(String dfId) {
+        this.dfId = dfId;
+    }
+
+    public SettingVO(String domain, String account, String appId, String appSecret, String dashboardId, String screenId, String viewResourceId, String viewId, String viewBusiFlag, String dfId) {
         this.domain = domain;
         this.account = account;
         this.appId = appId;
         this.appSecret = appSecret;
         this.dashboardId = dashboardId;
+        this.dfId = dfId;
         this.screenId = screenId;
         this.viewResourceId = viewResourceId;
         this.viewId = viewId;

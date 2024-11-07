@@ -98,6 +98,27 @@
             <dd><a href="javascript:switchMain(20);">iframe嵌入</a></dd>
         </dl>
     </li>
+    <li th:if="${vo.domain != null && !#strings.isEmpty(vo.appId)}" class="layui-nav-item">
+        <a href="javascript:;">数据填报树</a>
+        <dl class="layui-nav-child">
+            <dd><a href="javascript:switchMain(21);">div嵌入</a></dd>
+            <dd><a href="javascript:switchMain(22);">iframe嵌入</a></dd>
+        </dl>
+    </li>
+    <li th:if="${vo.domain != null && !#strings.isEmpty(vo.appId)}" class="layui-nav-item">
+        <a href="javascript:;">我的填报</a>
+        <dl class="layui-nav-child">
+            <dd><a href="javascript:switchMain(23);">div嵌入</a></dd>
+            <dd><a href="javascript:switchMain(24);">iframe嵌入</a></dd>
+        </dl>
+    </li>
+    <li th:if="${vo.domain != null && !#strings.isEmpty(vo.appId) && !#strings.isEmpty(vo.dfId)}" class="layui-nav-item">
+        <a href="javascript:;">数据填报编辑</a>
+        <dl class="layui-nav-child">
+            <dd><a href="javascript:switchMain(25);">div嵌入</a></dd>
+            <dd><a href="javascript:switchMain(26);">iframe嵌入</a></dd>
+        </dl>
+    </li>
 </ul>
 
 <div class="main-div">
@@ -117,21 +138,35 @@
         "DatasourceTree", "DatasetTree", "PanelTree", "ScreenTree",
         "DashboardViewIframe", "VisualizationViewIframe", "DashboardEditorIframe",
         "VisualizationEditorIframe", "", "", "DatasourceTreeIframe", "DatasetTreeIframe",
-        "PanelTreeIframe", "ScreenTreeIframe"
+        "PanelTreeIframe", "ScreenTreeIframe",
+        "DataFillingTree", "DataFillingTreeIframe", "DataFillingHandler", "DataFillingHandlerIframe",
+        "DataFillingEditor", "DataFillingEditorIframe"
     ]
     var switchMain = index => {
         if (currentIndex === index) return
         var url = linkArray[index] + '?=' + (new Date()).getTime()
         document.getElementById("main-iframe").src = url
         currentIndex = index
-        var lightIndex = currentIndex % 10
-        if (currentIndex === 10 || currentIndex === 20) {
+        var lightIndex = 0
+        if (currentIndex === 21 || currentIndex === 22) {
             lightIndex = 10
+        } else if (currentIndex === 23 || currentIndex === 24) {
+            lightIndex = 11
+        } else if (currentIndex === 25 || currentIndex === 26) {
+            lightIndex = 12
+        } else {
+            lightIndex = currentIndex % 10
+            if (currentIndex === 10 || currentIndex === 20) {
+                lightIndex = 10
+            }
+            if (lightIndex > 5) {
+                lightIndex--
+            }
         }
-        if (lightIndex > 5) {
-            lightIndex--
+        var e = document.getElementsByClassName('layui-nav-item')[lightIndex]
+        if (e) {
+            e.classList.add('layui-this')
         }
-        document.getElementsByClassName('layui-nav-item')[lightIndex].classList.add('layui-this')
     }
     window.onload = () => {
         switchMain(0)
