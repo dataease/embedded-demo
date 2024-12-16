@@ -165,6 +165,21 @@ public class PageController {
         return "iframe/DataFillingEditor";
     }
 
+
+    @GetMapping("/CopilotEditor")
+    public String CopilotEditor(Model model) {
+        SettingVO vo = SettingUtils.read();
+        model.addAttribute("vo", vo);
+        return "CopilotEditor";
+    }
+
+    @GetMapping("/CopilotEditorIframe")
+    public String CopilotEditorIframe(Model model) {
+        SettingVO vo = SettingUtils.read();
+        model.addAttribute("vo", vo);
+        return "iframe/CopilotEditor";
+    }
+
     @GetMapping("/DataFillingHandler")
     public String dataFillingHandler(Model model) {
         SettingVO vo = SettingUtils.read();
