@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>flushbonading</title>
+    <link href="//unpkg.com/layui@2.9.0/dist/css/layui.css" rel="stylesheet">
+    <script src="//unpkg.com/layui@2.9.0/dist/layui.js"></script>
+</head>
+<style>
+    #de-view-container {
+        display: inline-flex;
+        width: 500px;
+        height: 500px;
+        overflow: auto;
+    }
+    .view-iframe {
+        width: 100%;
+        border: 0;
+        height: calc(100% - 5px);
+    }
+    .setting {
+        padding: 40px;
+    }
+    .layui-form-label {
+        width: 200px !important;
+    }
+    .layui-input-block {
+        margin-left: 200px !important;
+    }
+    .button-container {
+        float: right;
+    }
+</style>
+<body>
+<form class="layui-form layui-form-pane setting" style="display: flex" action="">
+    <div class="layui-form-item" style="width: 80%;margin-right: 20px;">
+        <label class="layui-form-label">web参数</label>
+        <div class="layui-input-block">
+            <input type="text" name="webParams" th:value="${vo.webParams}" autocomplete="off" placeholder="请输入" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item button-container">
+        <button class="layui-btn" lay-submit lay-filter="demo100">参数发送</button>
+    </div>
+</form>
+<div>请输入发送参数...</div>
+</body>
+<script th:inline="javascript" type="module">
+    var layer = null;
+    layui.use(['form'], function(){
+        var form = layui.form;
+        layer = layui.layer;
+        // 提交事件
+        form.on('submit(demo100)', function(data){
+            var field = data.field;
+            console.log('send: ' + field.webParams)
+            window.parent.postMessage(JSON.parse(field.webParams), '*')
+            return false;
+        });
+    });
+</script>
+
+</html>

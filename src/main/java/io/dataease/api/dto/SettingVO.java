@@ -30,6 +30,16 @@ public class SettingVO implements Serializable {
 
     private String sendParams;
 
+    private String webParams;
+
+    public String getWebParams() {
+        return webParams;
+    }
+
+    public void setWebParams(String webParams) {
+        this.webParams = webParams;
+    }
+
     public String getSendParams() {
         return sendParams;
     }
