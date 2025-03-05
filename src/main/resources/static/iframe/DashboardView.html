@@ -76,6 +76,8 @@
           if (event.data?.eventName === 'de_inner_params') {
             console.log("内部消息 Iframe DashboardView："+JSON.stringify(event.data))
             alert('DataEase 内部消息 Iframe DashboardView：'+JSON.stringify(event.data))
+          }else if(event.data?.eventName === 'canvas_init_ready'){
+            console.log("内部消息："+JSON.stringify(event.data))
           }else {
             if (event.data?.msgOrigin !== 'de-fit2cloud') {
               return
