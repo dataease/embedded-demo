@@ -115,6 +115,13 @@
       </div>
     </div>
   </div>
+  <div class="layui-form-item" pane>
+    <label class="layui-form-label">默认视图所属资源类型</label>
+    <div class="layui-input-block">
+      <input type="radio" name="viewBusiFlag" value="dashboard" title="仪表板" th:attr ="checked=${(vo == null || #strings.isEmpty(vo.viewBusiFlag) || #strings.equals(vo.viewBusiFlag, 'dashboard')) ? true : false}">
+      <input type="radio" name="viewBusiFlag" value="dataV" title="大屏" th:attr ="checked=${(vo != null && #strings.equals(vo.viewBusiFlag, 'dataV')) ? true : false}">
+    </div>
+  </div>
 
   <div class="layui-form-item">
     <label class="layui-form-label">预览初始化参数</label>
@@ -127,14 +134,6 @@
     <label class="layui-form-label">预览时发送参数</label>
     <div class="layui-input-block">
       <input type="text" name="sendParams" th:value="${vo.sendParams}" autocomplete="off" placeholder="请输入" class="layui-input">
-    </div>
-  </div>
-
-  <div class="layui-form-item" pane>
-    <label class="layui-form-label">默认视图所属资源类型</label>
-    <div class="layui-input-block">
-      <input type="radio" name="viewBusiFlag" value="dashboard" title="仪表板" th:attr ="checked=${(vo == null || #strings.isEmpty(vo.viewBusiFlag) || #strings.equals(vo.viewBusiFlag, 'dashboard')) ? true : false}">
-      <input type="radio" name="viewBusiFlag" value="dataV" title="大屏" th:attr ="checked=${(vo != null && #strings.equals(vo.viewBusiFlag, 'dataV')) ? true : false}">
     </div>
   </div>
 
