@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>flushbonading</title>
+</head>
+<style>
+  #de-view-container {
+    display: inline-flex;
+    width: 500px;
+    height: 500px;
+    overflow: auto;
+  }
+  .view-iframe {
+    width: 100%;
+    border: 0;
+    height: calc(100% - 5px);
+  }
+</style>
+<body>
+  <iframe height="600" width="1000" id="de-view-iframe" src="" ></iframe>
+</body>
+<script th:inline="javascript" type="module">
+  window.onload = () => {
+    var xhr = new XMLHttpRequest();
+    var account = [[${vo.account}]]
+    var url = `/token/${account}`
+    var busiFlag = 'dataV'
+    var dvId = [[${vo.screenId}]]
+    var domain = [[${vo.domain}]]
+    var type = 'TemplateManage'
+    xhr.onreadystatechange = function () {
+      if (xhr.readyState == 4 && xhr.status == 200) {
+        const token = xhr.response
+        let url = domain + "#/chart-view"
+        const params = {
+          busiFlag: busiFlag,
+          dvId: dvId,
+          type: type,
+          embeddedToken: token
+        }
+        const iframe = document.getElementById("de-view-iframe")
+        iframe.src = url
+
+        window.addEventListener('message', event => {
+          if (event.data?.msgOrigin !== 'de-fit2cloud') {
+            return
+          }
+          if (event.data?.type === 'dataease-embedded-interactive') {
+            dataeaseCallBack(event.data)
+            return
+          }
+          params['de-embedded'] = true
+          var contentWindow = iframe.contentWindow;
+          contentWindow.postMessage(params, url)
+        })
+      }
+    }
+    xhr.open('get', url, true);
+    xhr.send();
+  }
+  var dataeaseCallBack = args => {
+    console.log(args)
+    alert('call back from dataease!')
+  }
+</script>
+
+</html>

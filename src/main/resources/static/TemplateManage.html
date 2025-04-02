@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>flushbonading</title>
+
+  <script crossorigin  type="module" th:src="@{{domain}js/div_import_0.0.0-dataease.js(domain=${vo.domain})}"></script>
+
+</head>
+<style>
+  #dataease-container {
+    display: inline-flex;
+    width: 1000px;
+    height: 800px;
+    overflow: auto;
+  }
+</style>
+<body>
+
+<div id="dataease-container">
+</div>
+
+</body>
+<script th:inline="javascript" type="module">
+  window.onload = () => {
+    var xhr = new XMLHttpRequest();
+    var account = [[${vo.account}]]
+    var url = `/token/${account}`
+    var dvId = [[${vo.screenId}]]
+    var opt = "create" //固定写法
+    var domain = [[${vo.domain}]]
+    xhr.onreadystatechange = function () {
+      if (xhr.readyState == 4 && xhr.status == 200) {
+        const token = xhr.response
+        const dataease = new DataEaseBi('TemplateManage', {
+          baseUrl: domain,
+          token: token,
+          dvId: dvId,
+          opt: opt
+        })
+        dataease.initialize({container: '#dataease-container'})
+      }
+    }
+    xhr.open('get', url, true);
+    xhr.send();
+  }
+
+
+
+</script>
+
+</html>

@@ -126,6 +126,13 @@
             <dd><a href="javascript:switchMain(28);">iframe嵌入</a></dd>
         </dl>
     </li>
+    <li th:if="${vo.domain != null && !#strings.isEmpty(vo.appId)}" class="layui-nav-item">
+        <a href="javascript:;">模板管理</a>
+        <dl class="layui-nav-child">
+            <dd><a href="javascript:switchMain(29);">div嵌入</a></dd>
+            <dd><a href="javascript:switchMain(30);">iframe嵌入</a></dd>
+        </dl>
+    </li>
 </ul>
 
 <div class="main-div">
@@ -147,7 +154,7 @@
         "VisualizationEditorIframe", "", "", "DatasourceTreeIframe", "DatasetTreeIframe",
         "PanelTreeIframe", "ScreenTreeIframe",
         "DataFillingTree", "DataFillingTreeIframe", "DataFillingHandler", "DataFillingHandlerIframe",
-        "DataFillingEditor", "DataFillingEditorIframe", "CopilotEditor", "CopilotEditorIframe"
+        "DataFillingEditor", "DataFillingEditorIframe", "CopilotEditor", "CopilotEditorIframe", "TemplateManage", "TemplateManageIframe"
     ]
     var switchMain = index => {
         if (currentIndex === index) return
@@ -163,6 +170,8 @@
             lightIndex = 12
         } else if (currentIndex === 27 || currentIndex === 28) {
             lightIndex = 13
+        } else if (currentIndex === 29 || currentIndex === 30) {
+            lightIndex = 14
         } else {
             lightIndex = currentIndex % 10
             if (currentIndex === 10 || currentIndex === 20) {

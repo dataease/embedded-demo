@@ -180,6 +180,20 @@ public class PageController {
         return "iframe/CopilotEditor";
     }
 
+    @GetMapping("/TemplateManage")
+    public String TemplateManage(Model model) {
+        SettingVO vo = SettingUtils.read();
+        model.addAttribute("vo", vo);
+        return "TemplateManage";
+    }
+
+    @GetMapping("/TemplateManageIframe")
+    public String TemplateManageIframe(Model model) {
+        SettingVO vo = SettingUtils.read();
+        model.addAttribute("vo", vo);
+        return "iframe/TemplateManage";
+    }
+
     @GetMapping("/DataFillingHandler")
     public String dataFillingHandler(Model model) {
         SettingVO vo = SettingUtils.read();
