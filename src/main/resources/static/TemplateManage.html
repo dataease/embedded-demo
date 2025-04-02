@@ -29,7 +29,6 @@
     var xhr = new XMLHttpRequest();
     var account = [[${vo.account}]]
     var url = `/token/${account}`
-    var dvId = [[${vo.screenId}]]
     var opt = "create" //固定写法
     var domain = [[${vo.domain}]]
     xhr.onreadystatechange = function () {
@@ -38,7 +37,6 @@
         const dataease = new DataEaseBi('TemplateManage', {
           baseUrl: domain,
           token: token,
-          dvId: dvId,
           opt: opt
         })
         dataease.initialize({container: '#dataease-container'})
