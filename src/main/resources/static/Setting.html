@@ -137,6 +137,43 @@
     </div>
   </div>
 
+
+  <div class="layui-form-item">
+    <label class="layui-form-label">SQLBot 服务</label>
+    <div class="layui-input-block">
+      <input type="text" name="sqlbotDomain" th:value="${vo.sqlbotDomain}" autocomplete="off" placeholder="请输入" lay-verify="required" class="layui-input">
+    </div>
+  </div>
+  <div class="layui-form-item">
+    <label class="layui-form-label">SQLBot 账号</label>
+    <div class="layui-input-block">
+      <input type="text" name="sqlbotAccount" th:value="${vo.sqlbotAccount}" autocomplete="off" placeholder="请输入" lay-verify="required" class="layui-input">
+    </div>
+  </div>
+
+  <div class="layui-form-item">
+    <label class="layui-form-label">SQLBot 嵌入应用 ID</label>
+    <div class="layui-input-block">
+      <input type="text" name="sqlbotEmbeddedId" th:value="${vo.sqlbotEmbeddedId}" autocomplete="off" placeholder="请输入" lay-verify="required" class="layui-input">
+    </div>
+  </div>
+
+  <div class="layui-form-item">
+    <div class="layui-inline">
+      <label class="layui-form-label">SQLBot APP ID</label>
+      <div class="layui-input-block setting-inline-input">
+        <input type="text" name="sqlbotAppId" th:value="${vo.sqlbotAppId}" autocomplete="off" placeholder="来自于DataEase-嵌入式管理" lay-verify="required" class="layui-input">
+      </div>
+    </div>
+
+    <div class="layui-inline">
+      <label class="layui-form-label">SQLBot APP Secret</label>
+      <div class="layui-input-inline setting-inline-input">
+        <input type="password" name="sqlbotAppSecret" th:value="${vo.sqlbotAppSecret}" autocomplete="off" placeholder="来自于DataEase-嵌入式管理" lay-verify="required" class="layui-input">
+      </div>
+    </div>
+  </div>
+
   <div class="layui-form-item button-container">
     <button type="reset" class="layui-btn layui-btn-primary">重置</button>
     <button class="layui-btn" lay-submit lay-filter="demo2">确认</button>

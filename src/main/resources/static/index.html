@@ -133,6 +133,10 @@
             <dd><a href="javascript:switchMain(30);">iframe嵌入</a></dd>
         </dl>
     </li>
+
+    <li th:if="${vo.sqlbotDomain != null && !#strings.isEmpty(vo.sqlbotAppId)}" class="layui-nav-item">
+        <a href="javascript:switchMain(31);">SQLBot 嵌入</a>
+    </li>
 </ul>
 
 <div class="main-div">
@@ -154,7 +158,7 @@
         "VisualizationEditorIframe", "", "", "DatasourceTreeIframe", "DatasetTreeIframe",
         "PanelTreeIframe", "ScreenTreeIframe",
         "DataFillingTree", "DataFillingTreeIframe", "DataFillingHandler", "DataFillingHandlerIframe",
-        "DataFillingEditor", "DataFillingEditorIframe", "CopilotEditor", "CopilotEditorIframe", "TemplateManage", "TemplateManageIframe"
+        "DataFillingEditor", "DataFillingEditorIframe", "CopilotEditor", "CopilotEditorIframe", "TemplateManage", "TemplateManageIframe", "sqlbot"
     ]
     var switchMain = index => {
         if (currentIndex === index) return
@@ -172,6 +176,8 @@
             lightIndex = 13
         } else if (currentIndex === 29 || currentIndex === 30) {
             lightIndex = 14
+        } else if (currentIndex === 31) {
+            lightIndex = 12
         } else {
             lightIndex = currentIndex % 10
             if (currentIndex === 10 || currentIndex === 20) {

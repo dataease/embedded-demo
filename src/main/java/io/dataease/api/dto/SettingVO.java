@@ -32,6 +32,12 @@ public class SettingVO implements Serializable {
 
     private String webParams;
 
+    private String sqlbotDomain;
+    private String sqlbotAccount;
+    private String sqlbotAppId;
+    private String sqlbotAppSecret;
+    private String sqlbotEmbeddedId;
+
     public String getWebParams() {
         return webParams;
     }
@@ -134,6 +140,46 @@ public class SettingVO implements Serializable {
 
     public void setDfId(String dfId) {
         this.dfId = dfId;
+    }
+
+    public String getSqlbotDomain() {
+        return sqlbotDomain;
+    }
+
+    public void setSqlbotDomain(String sqlbotDomain) {
+        this.sqlbotDomain = sqlbotDomain;
+    }
+
+    public String getSqlbotAccount() {
+        return sqlbotAccount;
+    }
+
+    public void setSqlbotAccount(String sqlbotAccount) {
+        this.sqlbotAccount = sqlbotAccount;
+    }
+
+    public String getSqlbotAppId() {
+        return sqlbotAppId;
+    }
+
+    public void setSqlbotAppId(String sqlbotAppId) {
+        this.sqlbotAppId = sqlbotAppId;
+    }
+
+    public String getSqlbotAppSecret() {
+        return sqlbotAppSecret;
+    }
+
+    public void setSqlbotAppSecret(String sqlbotAppSecret) {
+        this.sqlbotAppSecret = sqlbotAppSecret;
+    }
+
+    public String getSqlbotEmbeddedId() {
+        return sqlbotEmbeddedId;
+    }
+
+    public void setSqlbotEmbeddedId(String sqlbotEmbeddedId) {
+        this.sqlbotEmbeddedId = sqlbotEmbeddedId;
     }
 
     public SettingVO(String domain, String account, String appId, String appSecret, String dashboardId, String screenId, String viewResourceId, String viewId, String viewBusiFlag, String dfId) {

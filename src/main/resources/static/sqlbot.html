@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>adc</title>
+    <!--<script type="module" async defer th:src="@{${vo.sqlbotDomain} + '/xpack_static/sqlbot-embedded-dynamic.umd.js'}"></script>-->
+    <style>
+        #app {
+            width: 1000px;
+            height: 800px;
+        }
+    </style>
+</head>
+<body>
+<div id="app"></div>
+
+</body>
+<script th:inline="javascript" type="module">
+    window.onload = () => {
+        var xhr = new XMLHttpRequest();
+        var account = [[${vo.sqlbotAccount}]]
+        var url = `/sqlbotToken/${account}`
+
+        var sqpbotAppId = [[${vo.sqlbotAppId}]]
+
+        var sqlbotDomain = [[${vo.sqlbotDomain}]]
+        const script = document.createElement('script');
+        script.defer = true;
+        script.async = true;
+        if (!sqlbotDomain.endsWith('/')) {
+            sqlbotDomain += '/'
+        }
+        script.src = sqlbotDomain + "xpack_static/sqlbot-embedded-dynamic.umd.js";
+        document.head.appendChild(script);
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState == 4 && xhr.status == 200) {
+                const token = xhr.response
+
+                var tinmer = setInterval(() => {
+                    if (sqlbot_embedded_handler?.mounted) {
+                        sqlbot_embedded_handler.mounted('#app', { "appId": sqpbotAppId, token })
+                        clearInterval(tinmer)
+                    }
+                }, 500)
+
+            }
+        }
+        xhr.open('get', url, true);
+        xhr.send();
+    }
+
+
+
+</script>
+</html>
