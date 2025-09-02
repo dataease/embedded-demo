@@ -36,7 +36,6 @@ public class SettingVO implements Serializable {
     private String sqlbotAccount;
     private String sqlbotAppId;
     private String sqlbotAppSecret;
-    private String sqlbotEmbeddedId;
 
     public String getWebParams() {
         return webParams;
@@ -174,13 +173,6 @@ public class SettingVO implements Serializable {
         this.sqlbotAppSecret = sqlbotAppSecret;
     }
 
-    public String getSqlbotEmbeddedId() {
-        return sqlbotEmbeddedId;
-    }
-
-    public void setSqlbotEmbeddedId(String sqlbotEmbeddedId) {
-        this.sqlbotEmbeddedId = sqlbotEmbeddedId;
-    }
 
     public SettingVO(String domain, String account, String appId, String appSecret, String dashboardId, String screenId, String viewResourceId, String viewId, String viewBusiFlag, String dfId) {
         this.domain = domain;
