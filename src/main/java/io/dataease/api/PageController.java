@@ -194,6 +194,20 @@ public class PageController {
         return "iframe/TemplateManage";
     }
 
+    @GetMapping("/ExportCenter")
+    public String exportCenter(Model model) {
+        SettingVO vo = SettingUtils.read();
+        model.addAttribute("vo", vo);
+        return "ExportCenter";
+    }
+
+    @GetMapping("/ExportCenterIframe")
+    public String exportCenterIframe(Model model) {
+        SettingVO vo = SettingUtils.read();
+        model.addAttribute("vo", vo);
+        return "iframe/ExportCenter";
+    }
+
     @GetMapping("/DataFillingHandler")
     public String dataFillingHandler(Model model) {
         SettingVO vo = SettingUtils.read();

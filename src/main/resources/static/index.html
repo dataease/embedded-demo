@@ -133,9 +133,16 @@
             <dd><a href="javascript:switchMain(30);">iframe嵌入</a></dd>
         </dl>
     </li>
+    <li th:if="${vo.domain != null && !#strings.isEmpty(vo.appId)}" class="layui-nav-item">
+        <a href="javascript:;">数据导出中心</a>
+        <dl class="layui-nav-child">
+            <dd><a href="javascript:switchMain(31);">div嵌入</a></dd>
+            <dd><a href="javascript:switchMain(32);">iframe嵌入</a></dd>
+        </dl>
+    </li>
 
     <li th:if="${vo.sqlbotDomain != null && !#strings.isEmpty(vo.sqlbotAppId)}" class="layui-nav-item">
-        <a href="javascript:switchMain(31);">SQLBot 嵌入</a>
+        <a href="javascript:switchMain(33);">SQLBot 嵌入</a>
     </li>
 </ul>
 
@@ -158,7 +165,7 @@
         "VisualizationEditorIframe", "", "", "DatasourceTreeIframe", "DatasetTreeIframe",
         "PanelTreeIframe", "ScreenTreeIframe",
         "DataFillingTree", "DataFillingTreeIframe", "DataFillingHandler", "DataFillingHandlerIframe",
-        "DataFillingEditor", "DataFillingEditorIframe", "CopilotEditor", "CopilotEditorIframe", "TemplateManage", "TemplateManageIframe", "sqlbot"
+        "DataFillingEditor", "DataFillingEditorIframe", "CopilotEditor", "CopilotEditorIframe", "TemplateManage", "TemplateManageIframe", "ExportCenter", "ExportCenterIframe", "sqlbot"
     ]
     var switchMain = index => {
         if (currentIndex === index) return
@@ -176,8 +183,10 @@
             lightIndex = 13
         } else if (currentIndex === 29 || currentIndex === 30) {
             lightIndex = 14
-        } else if (currentIndex === 31) {
-            lightIndex = 12
+        } else if (currentIndex === 31 || currentIndex === 32) {
+            lightIndex = 15
+        } else if (currentIndex === 33) {
+            lightIndex = 16
         } else {
             lightIndex = currentIndex % 10
             if (currentIndex === 10 || currentIndex === 20) {
