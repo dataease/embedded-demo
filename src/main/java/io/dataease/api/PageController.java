@@ -5,6 +5,7 @@ import io.dataease.api.utils.SettingUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class PageController {
@@ -22,6 +23,15 @@ public class PageController {
         SettingVO vo = SettingUtils.read();
         model.addAttribute("vo", vo);
         return "Setting";
+    }
+
+    @GetMapping("/Spreadsheet")
+    public String spreadsheet(Model model,
+                              @RequestParam(name = "embed", defaultValue = "div") String embed) {
+        SettingVO vo = SettingUtils.read();
+        model.addAttribute("vo", vo);
+        model.addAttribute("iframeMode", "iframe".equals(embed));
+        return "Spreadsheet";
     }
 
     @GetMapping("/DashboardView")
