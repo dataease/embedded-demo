@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>电子表格嵌入测试</title>
+    <link rel="stylesheet" href="//unpkg.com/layui@2.9.0/dist/css/layui.css">
+    <script th:if="${!iframeMode && !#strings.isEmpty(vo.domain)}" crossorigin type="module"
+            th:src="${vo.domain + (#strings.endsWith(vo.domain, '/') ? '' : '/') + 'js/div_import_0.0.0-dataease.js'}"></script>
+    <style>
+        #spreadsheet-demo {
+            margin: 0;
+            padding: 16px;
+            box-sizing: border-box;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+        .spreadsheet-controls {
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+        #spreadsheet-form input,
+        #spreadsheet-form select {
+            /* 测试页控件固定使用浅色，避免继承嵌入组件或浏览器的深色配色。 */
+            color-scheme: light;
+            background-color: #fff;
+            color: #1f2329;
+            height: 36px;
+            border: 1px solid #d2d2d2;
+            padding: 0 8px;
+            box-sizing: border-box;
+        }
+        #spreadsheet-form input::placeholder {
+            color: #86909c;
+            opacity: 1;
+        }
+        .spreadsheet-tips {
+            color: #666;
+        }
+        #spreadsheet-status {
+            color: #b33;
+        }
+        #spreadsheet-host {
+            flex: 1;
+            min-height: 0;
+            position: relative;
+            overflow: hidden;
+            border: 1px solid #e5e5e5;
+        }
+        #spreadsheet-host > iframe {
+            display: block;
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+    </style>
+</head>
+<body id="spreadsheet-demo">
+<form id="spreadsheet-form" class="spreadsheet-controls" method="get" th:action="@{/Spreadsheet}">
+    <label>嵌入方式
+        <select name="embed">
+            <option value="div">DIV</option>
+            <option value="iframe">iframe</option>
+        </select>
+    </label>
+    <label>页面
+        <select name="mode">
+            <option value="manage">管理</option>
+            <option value="preview">预览</option>
+            <option value="edit">编辑</option>
+            <option value="create">新建</option>
+        </select>
+    </label>
+    <label>电子表格 ID
+        <input name="resourceId" type="text" placeholder="预览、编辑时必填" autocomplete="off">
+    </label>
+    <label>目录 ID
+        <input name="pid" type="text" placeholder="新建时可填，默认 0" autocomplete="off">
+    </label>
+    <button class="layui-btn" type="submit">加载</button>
+</form>
+<p class="spreadsheet-tips">使用系统设置中的 DataEase 服务和账号。预览需填写已发布的电子表格 ID；新建可指定目录。</p>
+<p id="spreadsheet-status" role="status">正在加载……</p>
+<div id="spreadsheet-host"></div>
+
+<script th:inline="javascript" type="module">
+    const form = document.getElementById('spreadsheet-form');
+    const status = document.getElementById('spreadsheet-status');
+    const query = new URLSearchParams(window.location.search);
+    const iframeMode = [[${iframeMode}]];
+    const entries = {
+        manage: { type: 'SpreadsheetPanel', opt: '' },
+        preview: { type: 'Spreadsheet', opt: '' },
+        edit: { type: 'SpreadsheetEditor', opt: 'edit' },
+        create: { type: 'SpreadsheetEditor', opt: 'create' }
+    };
+    let mode = query.get('mode');
+    if (!Object.hasOwn(entries, mode)) {
+        mode = 'manage';
+    }
+    form.elements.embed.value = iframeMode ? 'iframe' : 'div';
+    form.elements.mode.value = mode;
+    form.elements.resourceId.value = query.get('resourceId') || '';
+    form.elements.pid.value = query.get('pid') || '';
+
+    const updateRequired = () => {
+        form.elements.resourceId.required = ['preview', 'edit'].includes(form.elements.mode.value);
+    };
+    form.elements.mode.addEventListener('change', updateRequired);
+    updateRequired();
+
+    // 切换配置时重新加载本页，让两种嵌入方式各自使用完整的初始化流程。
+    window.addEventListener('load', async () => {
+        try {
+            const domain = [[${vo.domain}]];
+            const account = [[${vo.account}]];
+            if (!domain || !account) {
+                throw new Error('请先在系统设置中配置 DataEase 服务和账号。');
+            }
+            let resourceId = form.elements.resourceId.value.trim();
+            if (['preview', 'edit'].includes(mode) && !resourceId) {
+                throw new Error('请填写电子表格 ID 后加载。');
+            }
+            if (mode === 'create') {
+                resourceId = '';
+            }
+            const response = await fetch('/token/' + encodeURIComponent(account));
+            if (!response.ok) {
+                throw new Error('获取嵌入令牌失败，请检查系统设置中的账号和应用配置。');
+            }
+            const token = await response.text();
+            const baseUrl = domain.endsWith('/') ? domain : domain + '/';
+            const entry = entries[mode];
+            const params = {
+                busiFlag: 'spreadsheet',
+                resourceId,
+                pid: form.elements.pid.value.trim() || '0',
+                opt: entry.opt
+            };
+
+            if (iframeMode) {
+                const iframe = document.createElement('iframe');
+                iframe.title = '电子表格';
+                iframe.allowFullscreen = true;
+                const url = baseUrl + '#/chart-view';
+                const origin = new URL(url).origin;
+                // 只响应当前 DataEase iframe 的握手消息，不向其他窗口发送令牌。
+                window.addEventListener('message', event => {
+                    if (event.source !== iframe.contentWindow || event.origin !== origin) {
+                        return;
+                    }
+                    if (event.data?.ready !== true || event.data?.msgOrigin !== 'de-fit2cloud') {
+                        return;
+                    }
+                    iframe.contentWindow.postMessage({
+                        ...params,
+                        type: entry.type,
+                        embeddedToken: token,
+                        'de-embedded': true
+                    }, origin);
+                });
+                iframe.src = url;
+                document.getElementById('spreadsheet-host').appendChild(iframe);
+            } else {
+                if (!window.DataEaseBi) {
+                    throw new Error('嵌入脚本未加载，请检查 DataEase 服务地址及部署的前端资源。');
+                }
+                const dataease = new DataEaseBi(entry.type, {
+                    ...params,
+                    baseUrl,
+                    token
+                });
+                await dataease.initialize({ container: '#spreadsheet-host' });
+            }
+            status.hidden = true;
+        } catch (error) {
+            status.textContent = error.message || '电子表格加载失败。';
+        }
+    });
+</script>
+</body>
+</html>

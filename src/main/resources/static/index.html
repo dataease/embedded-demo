@@ -144,6 +144,10 @@
     <li th:if="${vo.sqlbotDomain != null && !#strings.isEmpty(vo.sqlbotAppId)}" class="layui-nav-item">
         <a href="javascript:switchMain(33);">SQLBot 嵌入</a>
     </li>
+    <li th:if="${vo.domain != null && !#strings.isEmpty(vo.appId)}"
+        id="spreadsheet-nav" class="layui-nav-item">
+        <a href="javascript:switchMain(34);">电子表格</a>
+    </li>
 </ul>
 
 <div class="main-div">
@@ -165,7 +169,8 @@
         "VisualizationEditorIframe", "", "", "DatasourceTreeIframe", "DatasetTreeIframe",
         "PanelTreeIframe", "ScreenTreeIframe",
         "DataFillingTree", "DataFillingTreeIframe", "DataFillingHandler", "DataFillingHandlerIframe",
-        "DataFillingEditor", "DataFillingEditorIframe", "CopilotEditor", "CopilotEditorIframe", "TemplateManage", "TemplateManageIframe", "ExportCenter", "ExportCenterIframe", "sqlbot"
+        "DataFillingEditor", "DataFillingEditorIframe", "CopilotEditor", "CopilotEditorIframe", "TemplateManage", "TemplateManageIframe", "ExportCenter", "ExportCenterIframe", "sqlbot",
+        "Spreadsheet"
     ]
     var switchMain = index => {
         if (currentIndex === index) return
@@ -197,6 +202,9 @@
             }
         }
         var e = document.getElementsByClassName('layui-nav-item')[lightIndex]
+        if (currentIndex === 34) {
+            e = document.getElementById('spreadsheet-nav')
+        }
         if (e) {
             e.classList.add('layui-this')
         }
