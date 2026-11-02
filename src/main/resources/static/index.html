@@ -11,6 +11,62 @@
 
 </head>
 <style>
+    .menu-bar {
+        display: flex;
+        height: 60px;
+        background: #393d49;
+        position: relative;
+        z-index: 1000;
+    }
+
+    .menu-scroll {
+        flex: 1;
+        min-width: 0;
+        overflow-x: auto;
+        scrollbar-width: none;
+    }
+
+    .menu-scroll::-webkit-scrollbar {
+        display: none;
+    }
+
+    .menu-scroll .layui-nav {
+        width: max-content;
+        min-width: 100%;
+        box-sizing: border-box;
+        white-space: nowrap;
+        border-radius: 0;
+    }
+
+    .menu-scroll .layui-nav-child {
+        position: fixed;
+        top: 60px;
+        min-width: 0;
+        white-space: nowrap;
+    }
+
+    .menu-arrow {
+        flex: 0 0 36px;
+        border: 0;
+        background: #393d49;
+        color: white;
+        font-size: 26px;
+        cursor: pointer;
+    }
+
+    .menu-arrow[hidden] {
+        display: none;
+    }
+
+    .menu-arrow:hover:not(:disabled), .menu-arrow:focus-visible {
+        background: #4e5465;
+    }
+
+    .menu-arrow:disabled {
+        color: #858894;
+        cursor: default;
+    }
+
     .main-div {
         width: 100%;
         position: absolute;
@@ -26,6 +82,9 @@
 </style>
 <body>
 
+<nav class="menu-bar" aria-label="嵌入示例菜单">
+<button type="button" class="menu-arrow" id="menu-left" aria-label="向左滚动菜单" aria-controls="menu-scroll" hidden>‹</button>
+<div class="menu-scroll" id="menu-scroll">
 <ul class="layui-nav">
     <li class="layui-nav-item layui-this"><a href="javascript:switchMain(0);">系统设置</a></li>
 
@@ -141,26 +200,76 @@
         </dl>
     </li>
 
-    <li th:if="${vo.sqlbotDomain != null && !#strings.isEmpty(vo.sqlbotAppId)}" class="layui-nav-item">
-        <a href="javascript:switchMain(33);">SQLBot 嵌入</a>
-    </li>
     <li th:if="${vo.domain != null && !#strings.isEmpty(vo.appId)}"
         id="spreadsheet-nav" class="layui-nav-item">
-        <a href="javascript:switchMain(34);">电子表格</a>
+        <a href="javascript:switchMain(33);">电子表格</a>
     </li>
 </ul>
+</div>
+<button type="button" class="menu-arrow" id="menu-right" aria-label="向右滚动菜单" aria-controls="menu-scroll" hidden>›</button>
+</nav>
 
 <div class="main-div">
     <iframe id="main-iframe" class="main-iframe"></iframe>
 </div>
 <script>
-    layui.use('element', function () {
-        var element = layui.element;
-        //监听导航点击
-        element.on('nav(demo)', function (elem) {
-            layer.msg(elem.text());
-        });
+    layui.use('element')
+    var menuBar = document.querySelector('.menu-bar')
+    var menuScroll = document.getElementById('menu-scroll')
+    var menu = menuScroll.querySelector('.layui-nav')
+    var menuLeft = document.getElementById('menu-left')
+    var menuRight = document.getElementById('menu-right')
+
+    var positionDropdowns = () => {
+        var viewport = menuScroll.getBoundingClientRect()
+        menu.querySelectorAll('.layui-nav-item').forEach(item => {
+            var dropdown = item.querySelector('.layui-nav-child')
+            if (!dropdown) return
+            var rect = item.getBoundingClientRect()
+            dropdown.style.minWidth = rect.width + 'px'
+            dropdown.style.top = viewport.bottom + 'px'
+            dropdown.style.left = Math.max(0, Math.min(rect.left,
+                document.documentElement.clientWidth - Math.max(rect.width, dropdown.offsetWidth))) + 'px'
+            dropdown.style.visibility = rect.right <= viewport.left || rect.left >= viewport.right ? 'hidden' : ''
+        })
+    }
+
+    var updateMenuScroll = () => {
+        var overflow = menu.scrollWidth > menuBar.clientWidth + 1
+        menuLeft.hidden = !overflow
+        menuRight.hidden = !overflow
+        menuLeft.disabled = menuScroll.scrollLeft <= 1
+        menuRight.disabled = menuScroll.scrollLeft + menuScroll.clientWidth >= menuScroll.scrollWidth - 1
+        positionDropdowns()
+    }
+
+    var revealMenuItem = item => {
+        var rect = item.getBoundingClientRect()
+        var viewport = menuScroll.getBoundingClientRect()
+        var distance = rect.left < viewport.left ? rect.left - viewport.left :
+            rect.right > viewport.right ? rect.right - viewport.right : 0
+        if (distance) menuScroll.scrollBy({left: distance, behavior: 'smooth'})
+    }
+
+    menuLeft.addEventListener('click', () => {
+        menuScroll.scrollBy({left: -menuScroll.clientWidth * 0.75, behavior: 'smooth'})
     })
+    menuRight.addEventListener('click', () => {
+        menuScroll.scrollBy({left: menuScroll.clientWidth * 0.75, behavior: 'smooth'})
+    })
+    menuScroll.addEventListener('scroll', updateMenuScroll)
+    menu.addEventListener('mouseover', positionDropdowns)
+    menu.addEventListener('focusin', event => {
+        var item = event.target.closest('.layui-nav-item')
+        if (item) revealMenuItem(item)
+    })
+    var menuResizeObserver = new ResizeObserver(() => {
+        updateMenuScroll()
+        var selected = menu.querySelector('.layui-nav-item.layui-this')
+        if (selected) revealMenuItem(selected)
+    })
+    menuResizeObserver.observe(menuBar)
+    menuResizeObserver.observe(menu)
     var currentIndex = -1
     var linkArray = ['Setting', 'DashboardView', 'VisualizationView',
         'DashboardEditor', 'VisualizationEditor', 'view', 'ViewIframe',
@@ -169,7 +278,7 @@
         "VisualizationEditorIframe", "", "", "DatasourceTreeIframe", "DatasetTreeIframe",
         "PanelTreeIframe", "ScreenTreeIframe",
         "DataFillingTree", "DataFillingTreeIframe", "DataFillingHandler", "DataFillingHandlerIframe",
-        "DataFillingEditor", "DataFillingEditorIframe", "CopilotEditor", "CopilotEditorIframe", "TemplateManage", "TemplateManageIframe", "ExportCenter", "ExportCenterIframe", "sqlbot",
+        "DataFillingEditor", "DataFillingEditorIframe", "CopilotEditor", "CopilotEditorIframe", "TemplateManage", "TemplateManageIframe", "ExportCenter", "ExportCenterIframe",
         "Spreadsheet"
     ]
     var switchMain = index => {
@@ -177,39 +286,22 @@
         var url = linkArray[index] + '?=' + (new Date()).getTime()
         document.getElementById("main-iframe").src = url
         currentIndex = index
-        var lightIndex = 0
-        if (currentIndex === 21 || currentIndex === 22) {
-            lightIndex = 10
-        } else if (currentIndex === 23 || currentIndex === 24) {
-            lightIndex = 11
-        } else if (currentIndex === 25 || currentIndex === 26) {
-            lightIndex = 12
-        } else if (currentIndex === 27 || currentIndex === 28) {
-            lightIndex = 13
-        } else if (currentIndex === 29 || currentIndex === 30) {
-            lightIndex = 14
-        } else if (currentIndex === 31 || currentIndex === 32) {
-            lightIndex = 15
-        } else if (currentIndex === 33) {
-            lightIndex = 16
-        } else {
-            lightIndex = currentIndex % 10
-            if (currentIndex === 10 || currentIndex === 20) {
-                lightIndex = 10
+        var link = document.querySelector('.layui-nav a[href="javascript:switchMain(' + index + ');"]')
+        document.querySelectorAll('.layui-nav .layui-this').forEach(item => {
+            item.classList.remove('layui-this')
+        })
+        if (link) {
+            var item = link.closest('.layui-nav-item')
+            item.classList.add('layui-this')
+            revealMenuItem(item)
+            var child = link.closest('dd')
+            if (child) {
+                child.classList.add('layui-this')
             }
-            if (lightIndex > 5) {
-                lightIndex--
-            }
-        }
-        var e = document.getElementsByClassName('layui-nav-item')[lightIndex]
-        if (currentIndex === 34) {
-            e = document.getElementById('spreadsheet-nav')
-        }
-        if (e) {
-            e.classList.add('layui-this')
         }
     }
     window.onload = () => {
+        updateMenuScroll()
         switchMain(0)
 
         window.addEventListener('message', event => {

@@ -230,13 +230,5 @@ public class PageController {
         model.addAttribute("vo", vo);
         return "iframe/DataFillingHandler";
     }
-    @GetMapping("/sqlbot")
-    public String sqlbot(Model model) {
-        SettingVO vo = SettingUtils.read();
-        model.addAttribute("vo", vo);
-        return "sqlbot";
-    }
-
-
 
 }

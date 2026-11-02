@@ -40,13 +40,4 @@ public class TokenApi {
         return builder.sign(algorithm);
     }
 
-    @GetMapping("/sqlbotToken/{account}")
-    public String sqlbotGenerate(@PathVariable("account") String account) {
-        SettingVO vo = SettingUtils.read();
-        Algorithm algorithm = Algorithm.HMAC256(vo.getSqlbotAppSecret());
-        JWTCreator.Builder builder = JWT.create();
-        builder.withClaim("account", account).withClaim("appId", vo.getSqlbotAppId());
-        builder.withIssuedAt(new Date());
-        return builder.sign(algorithm);
-    }
 }
